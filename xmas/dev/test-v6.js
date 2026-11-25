@@ -1,7 +1,7 @@
 // 🎄 Yılbaşı "Gala Gecesi" TEST v5 — konseptin TAMAMI | WEB + MOBILE (otomatik algılar)
 (() => {
   ['xmas-test-v1', 'xmas-test-v2', 'xmas-test-v3', 'xmas-test-v4', 'xmas-test-v5', 'xmas-test-v6'].forEach((id) => document.getElementById(id)?.remove());
-  const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@5679f889fe6b/xmas/';
+  const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@8bef45e22af5/xmas/';
   const isMob = /is-mobile/.test(document.documentElement.className + ' ' + document.body.className);
   const $ = (s) => document.querySelector(s);
   const cls = (el) => '.' + [...el.classList].join('.');
@@ -65,19 +65,19 @@
     const off = isMob ? { t: -6, s: -6 } : { t: -14, s: -16 };
     css += `
     @keyframes xmasSwayL { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(1.2deg); } }
-    @keyframes xmasSwayR { 0%,100% { transform: scaleX(-1) rotate(0deg); } 50% { transform: scaleX(-1) rotate(1.2deg); } }
+    @keyframes xmasSwayR { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-1.2deg); } }
     .hm-row-bc.has-slider { position: relative !important; }
     /* Sol üst köşe */
     .hm-row-bc.has-slider::before { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:5 !important;
       top:${off.t}px !important; left:${off.s}px !important; width:${bw}px !important; height:${bh}px !important;
       background:url("${CDN}xmas-branch.webp") left top / contain no-repeat !important;
-      transform-origin: 0 0 !important; filter: drop-shadow(0 8px 14px rgba(0,0,0,.45));
+      transform-origin: 0 0 !important; filter: brightness(1.12) saturate(1.1) drop-shadow(0 8px 14px rgba(0,0,0,.45));
       animation: xmasSwayL 6s ease-in-out infinite !important; }
     /* Sağ üst köşe (aynalı) */
     .hm-row-bc.has-slider::after { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:5 !important;
       top:${off.t}px !important; right:${off.s}px !important; width:${bw}px !important; height:${bh}px !important;
-      background:url("${CDN}xmas-branch.webp") left top / contain no-repeat !important;
-      transform-origin: 0 0 !important; filter: drop-shadow(0 8px 14px rgba(0,0,0,.45));
+      background:url("${CDN}xmas-branch-r.webp") right top / contain no-repeat !important;
+      transform-origin: 100% 0 !important; filter: brightness(1.12) saturate(1.1) drop-shadow(0 8px 14px rgba(0,0,0,.45));
       animation: xmasSwayR 7s ease-in-out .8s infinite !important; }`;
     log.push(`🌲 Dallar: slider köşeleri | ${bw}×${bh}px`);
   }
