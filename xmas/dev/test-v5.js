@@ -39,19 +39,23 @@
       animation: xmasGlint 4.5s ease-in-out infinite !important; }`;
   log.push(`👑 Jester merkezi: x=${jx} y=${jy}`);
 
-  // ── 6) Işık zinciri v2 — render ampuller + parlama katmanı
+  // ── 6) Işık zinciri v2 — sönük taban + 4 grup düzensiz yanıp sönme
   const hdrBottomInHm = Math.round(R(hdr).bottom - hmR.top);
-  const glowSel = isMob ? '.hdr-main-content-bc::after' : '.hdr-main-content-bc::before';
+  const litSel = isMob ? '.hdr-main-content-bc::after' : '.hdr-main-content-bc::before';
+  const G = (k) => `url("${CDN}xmas-garland-g${k}.webp")`;
   css += `
-    /* 6 · Işık zinciri — ampuller */
+    @keyframes xmasTwinkle { 0% { background-position: 0 0, 0 -60px, 0 -60px, 0 -60px; } 3% { background-position: 0 0, 0 -60px, 0 -60px, 0 0; } 8% { background-position: 0 0, 0 0, 0 -60px, 0 0; } 9% { background-position: 0 0, 0 0, 0 -60px, 0 -60px; } 12% { background-position: 0 -60px, 0 0, 0 -60px, 0 -60px; } 18% { background-position: 0 -60px, 0 0, 0 0, 0 -60px; } 25% { background-position: 0 -60px, 0 -60px, 0 0, 0 -60px; } 30% { background-position: 0 0, 0 -60px, 0 0, 0 -60px; } 34% { background-position: 0 0, 0 -60px, 0 -60px, 0 -60px; } 36% { background-position: 0 0, 0 -60px, 0 -60px, 0 0; } 44% { background-position: 0 0, 0 -60px, 0 0, 0 0; } 45% { background-position: 0 -60px, 0 -60px, 0 0, 0 0; } 50% { background-position: 0 -60px, 0 -60px, 0 0, 0 -60px; } 52% { background-position: 0 -60px, 0 0, 0 0, 0 -60px; } 58% { background-position: 0 -60px, 0 0, 0 -60px, 0 -60px; } 60% { background-position: 0 -60px, 0 -60px, 0 -60px, 0 -60px; } 62% { background-position: 0 -60px, 0 -60px, 0 -60px, 0 0; } 70% { background-position: 0 0, 0 -60px, 0 -60px, 0 0; } 74% { background-position: 0 0, 0 -60px, 0 -60px, 0 -60px; } 78% { background-position: 0 -60px, 0 -60px, 0 -60px, 0 -60px; } 82% { background-position: 0 -60px, 0 0, 0 -60px, 0 -60px; } 88% { background-position: 0 -60px, 0 0, 0 0, 0 -60px; } 92% { background-position: 0 -60px, 0 0, 0 0, 0 0; } 96% { background-position: 0 -60px, 0 -60px, 0 0, 0 0; } 97% { background-position: 0 -60px, 0 -60px, 0 0, 0 -60px; } 100% { background-position: 0 -60px, 0 -60px, 0 0, 0 -60px; } }
+    /* 6 · Işık zinciri — sönük ampuller + tel */
     .header-bc::after { content:'' !important; position:absolute !important; left:0 !important; right:0 !important; bottom:-30px !important; height:35px !important;
-      pointer-events:none !important; z-index:4 !important; animation:none !important;
-      background:url("${CDN}xmas-garland.webp") 0 0 / 126px 35px repeat-x !important; filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)); }
-    /* 6 · Işık zinciri — parlama (nefes alır) */
-    ${glowSel} { content:'' !important; position:absolute !important; left:0 !important; right:0 !important; top:${hdrBottomInHm - 5}px !important; height:35px !important;
-      pointer-events:none !important; z-index:1 !important;
-      background:url("${CDN}xmas-garland-glow.webp") 0 0 / 126px 35px repeat-x !important;
-      animation: xmasGlow 2.4s ease-in-out infinite !important; }`;
+      pointer-events:none !important; z-index:1 !important; animation:none !important;
+      background:url("${CDN}xmas-garland-base.webp") 0 0 / 336px 35px repeat-x !important; filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)); }
+    /* 6 · Işık zinciri — yanık ampuller (4 grup, düzensiz takvim) */
+    ${litSel} { content:'' !important; position:absolute !important; left:0 !important; right:0 !important; top:${hdrBottomInHm - 5}px !important; height:35px !important;
+      pointer-events:none !important; z-index:2 !important;
+      background-image:${G(0)}, ${G(1)}, ${G(2)}, ${G(3)} !important;
+      background-size:336px 35px !important; background-repeat:repeat-x !important;
+      background-position:0 0, 0 -60px, 0 -60px, 0 -60px;
+      animation: xmasTwinkle 8s step-end infinite !important; }`;
   log.push(`💡 Header alt kenarı (hdr-main-content'e göre): ${hdrBottomInHm}px`);
 
   // ── 2) Asılı süs topları
