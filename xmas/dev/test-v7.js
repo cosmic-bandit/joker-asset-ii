@@ -125,10 +125,11 @@
     css += `
     /* 5 · Kartlarda altın varak süpürmesi */
     ${CARD} { position: relative !important; }
+    @keyframes xmasCardSweep { 0% { background-position: 150% 0; opacity: 0; } 4% { opacity: 1; } 32% { background-position: -50% 0; opacity: 1; } 36%,100% { background-position: -50% 0; opacity: 0; } }
     ${CARD}::after { content:'' !important; display:block !important; position:absolute !important; inset:0 !important; pointer-events:none !important; z-index:3 !important;
-      border-radius:inherit !important; mix-blend-mode: soft-light;
-      background:linear-gradient(115deg, transparent 38%, rgba(255,226,140,0) 42%, rgba(255,236,170,.95) 50%, rgba(255,226,140,0) 58%, transparent 62%) 0 0 / 300% 100% no-repeat !important;
-      animation: xmasSweep 6s ease-in-out infinite !important; }
+      border-radius:inherit !important; mix-blend-mode: screen;
+      background:linear-gradient(110deg, transparent 30%, rgba(255,214,120,.0) 36%, rgba(255,226,150,.55) 44%, rgba(255,250,230,.95) 50%, rgba(255,226,150,.55) 56%, rgba(255,214,120,0) 64%, transparent 70%) 0 0 / 250% 100% no-repeat !important;
+      animation: xmasCardSweep 4.5s ease-in-out infinite !important; }
     ${[1, 2, 3, 4, 5].map((k) => `${wrap}${isMob ? '' : ' '}:nth-child(${k}) .product-banner-info-bc::after { animation-delay: ${((k - 1) * 0.35).toFixed(2)}s !important; }`).join('\n    ')}`;
   }
 
