@@ -1,7 +1,7 @@
 // 🎄 Yılbaşı "Gala Gecesi" TEST v5 — konseptin TAMAMI | WEB + MOBILE (otomatik algılar)
 (() => {
   ['xmas-test-v1', 'xmas-test-v2', 'xmas-test-v3', 'xmas-test-v4', 'xmas-test-v5'].forEach((id) => document.getElementById(id)?.remove());
-  const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@a022b4d6d87d/xmas/';
+  const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@f92df1e0e1a2/xmas/';
   const isMob = /is-mobile/.test(document.documentElement.className + ' ' + document.body.className);
   const $ = (s) => document.querySelector(s);
   const cls = (el) => '.' + [...el.classList].join('.');
