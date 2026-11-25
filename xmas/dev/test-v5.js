@@ -5,7 +5,7 @@
   const isMob = /is-mobile/.test(document.documentElement.className + ' ' + document.body.className);
   const $ = (s) => document.querySelector(s);
   const cls = (el) => '.' + [...el.classList].join('.');
-  const free = (el, p) => ['none', 'normal'].includes(getComputedStyle(el, p).content);
+  const free = (el, p) => { const c = getComputedStyle(el, p); return ['none', 'normal'].includes(c.content) || c.display === 'none'; };
   const R = (el) => el.getBoundingClientRect();
   const SEP = '═'.repeat(60);
   const log = [];
@@ -71,7 +71,7 @@
   }
 
   // ── 1) Hediye fiyonku + ışık geçişi
-  const bowEl = $('.hm-row-bc.has-slider');
+  const bowEl = isMob ? null : $('.hm-row-bc.has-slider');   // mobile'da sayaç rozetiyle çakışıyor → yalnız web
   if (bowEl) {
     const bs = cls(bowEl);
     const b = isMob ? { w: 78, t: 4, r: 4 } : { w: 150, t: -34, r: -26 };
@@ -91,7 +91,7 @@
       transform-origin:60% 25% !important;
       animation: xmasBow 4s ease-in-out infinite, xmasSweep 5s ease-in-out 1s infinite !important; }`;
     log.push(`🎀 Fiyonk: ${bs} | ::after ${okA ? 'boş' : 'DOLU!'} | ::before ${okB ? 'boş' : 'DOLU!'}`);
-  } else log.push('🎀 ❌ Slider bulunamadı');
+  } else log.push(isMob ? '🎀 Fiyonk: mobile\'da kapalı (slider sayacıyla çakışıyor)' : '🎀 ❌ Slider bulunamadı');
 
   // ── 4) Web header "2027" sahnesi — boşluğa göre ortalanır, yer yoksa kendini gizler
   if (!isMob) {
@@ -129,17 +129,17 @@
   const CARD = isMob ? '.product-banner-container-bc.col-1 .product-banner-info-bc' : '.product-banner-container-bc.product-banner-without-titles .product-banner-info-bc';
   const cards = [...document.querySelectorAll(CARD)].filter((e) => R(e).width > 0);
   const cardFree = cards[0] && free(cards[0], '::after');
-  log.push(`✨ Kartlar: ${cards.length} adet | ${CARD} | ::after ${cardFree ? 'boş' : 'DOLU!'} | radius ${cards[0] ? getComputedStyle(cards[0]).borderRadius : '-'}`);
+  log.push(`✨ Kartlar: ${cards.length} adet | ${CARD} | ::after ${cardFree ? 'kullanılabilir' : 'DOLU!'} | radius ${cards[0] ? getComputedStyle(cards[0]).borderRadius : '-'}`);
   if (cards.length && cardFree) {
-    const wrap = CARD.split(' ')[0];
+    const wrap = isMob ? '.product-banner-container-bc.col-1 .swiper-slide' : '.product-banner-container-bc.product-banner-without-titles >';
     css += `
     /* 5 · Kartlarda altın varak süpürmesi */
     ${CARD} { position: relative !important; }
-    ${CARD}::after { content:'' !important; position:absolute !important; inset:0 !important; pointer-events:none !important; z-index:3 !important;
+    ${CARD}::after { content:'' !important; display:block !important; position:absolute !important; inset:0 !important; pointer-events:none !important; z-index:3 !important;
       border-radius:inherit !important; mix-blend-mode: soft-light;
       background:linear-gradient(115deg, transparent 38%, rgba(255,226,140,0) 42%, rgba(255,236,170,.95) 50%, rgba(255,226,140,0) 58%, transparent 62%) 0 0 / 300% 100% no-repeat !important;
       animation: xmasSweep 6s ease-in-out infinite !important; }
-    ${[1, 2, 3, 4, 5].map((k) => `${wrap} > :nth-child(${k}) .product-banner-info-bc::after { animation-delay: ${((k - 1) * 0.35).toFixed(2)}s !important; }`).join('\n    ')}`;
+    ${[1, 2, 3, 4, 5].map((k) => `${wrap}${isMob ? '' : ' '}:nth-child(${k}) .product-banner-info-bc::after { animation-delay: ${((k - 1) * 0.35).toFixed(2)}s !important; }`).join('\n    ')}`;
   }
 
   // ── 5b) Dönen border'lar → gold-şampanya (custom.css'teki conic-gradient kuralları klonlanır)
