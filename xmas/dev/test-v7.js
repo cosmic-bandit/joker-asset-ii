@@ -102,7 +102,7 @@
       filter: drop-shadow(0 0 8px rgba(251,191,36,.45)); animation: xmas2027 3.2s ease-in-out infinite !important; }
     /* 4 · "2027" — yazının üstünden ışık geçişi */
     .logo-container::after { content:'' !important; ${scene} z-index:4 !important;
-      background:${SHEEN} !important; mask:url("${CDN}xmas-2027-text.webp") center / contain no-repeat;
+      background:${SHEEN}; mask:url("${CDN}xmas-2027-text.webp") center / contain no-repeat;
       animation: xmasSweep 4.5s ease-in-out .5s infinite !important; }`;
     log.push(`🎆 Header boşluğu: affiliate sağı=${A}px | sağ grup genişliği=${Rw}px | boşluk=${Math.round(hmR.width - A - Rw)}px → sahne ${Math.max(0, Math.min(240, Math.round(hmR.width - A - Rw - 50)))}px`);
   } else {
@@ -128,7 +128,7 @@
     @keyframes xmasCardSweep { 0% { background-position: 150% 0; opacity: 0; } 4% { opacity: 1; } 32% { background-position: -50% 0; opacity: 1; } 36%,100% { background-position: -50% 0; opacity: 0; } }
     ${CARD}::after { content:'' !important; display:block !important; position:absolute !important; inset:0 !important; pointer-events:none !important; z-index:3 !important;
       border-radius:inherit !important; mix-blend-mode: screen;
-      background:linear-gradient(110deg, transparent 30%, rgba(255,214,120,.0) 36%, rgba(255,226,150,.55) 44%, rgba(255,250,230,.95) 50%, rgba(255,226,150,.55) 56%, rgba(255,214,120,0) 64%, transparent 70%) 0 0 / 250% 100% no-repeat !important;
+      background:linear-gradient(110deg, transparent 30%, rgba(255,214,120,.0) 36%, rgba(255,226,150,.55) 44%, rgba(255,250,230,.95) 50%, rgba(255,226,150,.55) 56%, rgba(255,214,120,0) 64%, transparent 70%) 0 0 / 250% 100% no-repeat;
       animation: xmasCardSweep 4.5s ease-in-out infinite !important; }
     ${[1, 2, 3, 4, 5].map((k) => `${wrap}${isMob ? '' : ' '}:nth-child(${k}) .product-banner-info-bc::after { animation-delay: ${((k - 1) * 0.35).toFixed(2)}s !important; }`).join('\n    ')}`;
   }
