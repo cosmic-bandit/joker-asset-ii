@@ -48,7 +48,7 @@
       pointer-events:none !important; z-index:4 !important; animation:none !important;
       background:url("${CDN}xmas-garland.webp") 0 0 / 126px 35px repeat-x !important; filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)); }
     /* 6 · Işık zinciri — parlama (nefes alır) */
-    ${glowSel} { content:'' !important; position:absolute !important; left:0 !important; right:0 !important; top:${hdrBottomInHm - 30}px !important; height:35px !important;
+    ${glowSel} { content:'' !important; position:absolute !important; left:0 !important; right:0 !important; top:${hdrBottomInHm - 5}px !important; height:35px !important;
       pointer-events:none !important; z-index:1 !important;
       background:url("${CDN}xmas-garland-glow.webp") 0 0 / 126px 35px repeat-x !important;
       animation: xmasGlow 2.4s ease-in-out infinite !important; }`;
