@@ -2,7 +2,7 @@
 (() => {
   ['xmas-test-v1', 'xmas-test-v2', 'xmas-test-v3', 'xmas-test-v4', 'xmas-test-v5', 'xmas-test-v6', 'xmas-test-v7', 'xmas-test-v8', 'xmas-test-v9', 'xmas-test-v10', 'xmas-alt2'].forEach((id) => document.getElementById(id)?.remove());
   const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@594d5d488257/xmas/';
-  const A2 = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@c1f6a6f155d3/xmas/alt2/';   // alternatif 2 assetleri
+  const A2 = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@fc24490a39a2/xmas/alt2/';   // alternatif 2 assetleri
   const isMob = /is-mobile/.test(document.documentElement.className + ' ' + document.body.className);
   const $ = (s) => document.querySelector(s);
   const cls = (el) => '.' + [...el.classList].join('.');
@@ -86,6 +86,37 @@
     // z-index: sayfa en üstteyken 1000 (header girlandının ve slider sayacının da üstünde); 12px kaydırınca 20'ye iner → sticky header'ın üstüne taşmaz.
     // Kaydırmaya bağlı animasyonu desteklemeyen tarayıcıda sabit 20 kalır (slider'ın kendi öğelerinin üstünde).
     log.push(`🌲 Köşe süsleri: ${cw}px genişlik`);
+
+    // ── 2b) Köşe süslerinden örgü iplerle sarkan kadife süsler (her ip ayrı sallanır)
+    const k = cw / 300;
+    const ROPES = {
+      L: [{ x: 150, len: 62, o: 'ball', w: 34, h: 31 }, { x: 205, len: 100, o: 'star', w: 30, h: 27 }, { x: 262, len: 46, o: 'bells', w: 38, h: 35 }],
+      R: [{ x: 150, len: 86, o: 'disco2', w: 32, h: 29 }, { x: 205, len: 50, o: 'gift', w: 33, h: 31 }, { x: 262, len: 104, o: 'sock', w: 29, h: 36 }],
+    };
+    const HOST = (side) => [`.hm-row-bc.has-slider > .hm-row-bc-inner::${side}`, `.hm-row-bc.has-slider .slider-bc::${side}`, `.hm-row-bc.has-slider .slider-bc > :first-child::${side}`];
+    const SW = ['x2SwingA 3.1s', 'x2SwingB 3.8s', 'x2SwingC 4.4s'];
+    const f1 = (n) => Math.round(n * 10) / 10;
+    css += `
+    @keyframes x2SwingA { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+    @keyframes x2SwingB { from { transform: rotate(5deg); } to { transform: rotate(-5deg); } }
+    @keyframes x2SwingC { from { transform: rotate(-8deg); } to { transform: rotate(6deg); } }`;
+    const hostsOK = [];
+    [['L', 'before', 'left'], ['R', 'after', 'right']].forEach(([key, ps, edge]) => {
+      HOST(ps).forEach((sel, i) => {
+        const r = ROPES[key][i];
+        const hostEl = $(sel.split('::')[0]);
+        if (!hostEl || !free(hostEl, '::' + ps)) { log.push(`⚠️ ip atlandı (pseudo dolu/yok): ${sel}`); return; }
+        const w = r.w * k, h = r.h * k, len = r.len * k;
+        css += `
+    ${sel} { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:15 !important;
+      top:${f1(off.t + 30 * k)}px !important; ${edge}:${f1(off.s + r.x * k - w / 2)}px !important; width:${f1(w)}px !important; height:${f1(len + h)}px !important;
+      background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope.webp") center top / ${f1(8 * k)}px auto no-repeat !important;
+      filter: drop-shadow(0 4px 5px rgba(0,0,0,.45)); transform-origin: 50% 0 !important;
+      animation: ${SW[i]} ease-in-out ${key === 'R' ? -1.3 * (i + 1) : -0.7 * i}s infinite alternate !important; }`;
+        hostsOK.push(`${key}${i + 1}:${r.o}`);
+      });
+    });
+    log.push(`🪢 Örgü ipten sarkan süsler: ${hostsOK.join(', ')}`);
   }
 
   // ── 4) Web header "2027" sahnesi — boşluğa göre ortalanır, yer yoksa kendini gizler
@@ -97,11 +128,13 @@
       left:calc((${A}px + 100% - ${Rw}px) / 2) !important; top:50% !important;
       width:clamp(0px, calc(100% - ${A}px - ${Rw}px - 50px), 240px) !important; aspect-ratio: 3 / 1 !important; height:auto !important;
       transform: translate(-50%,-50%);`;
-    const sceneK = scene.replace('aspect-ratio: 3 / 1', 'aspect-ratio: 3 / 2');   // konfeti katmanı daha yüksek
+    // kutlama katmanı: yazının 1.5 katı genişlikte, 12:5 oranında; patlangaçlar header içinde kalsın diye biraz yukarı kaydırılmış
+    const sceneFX = scene.replace(`width:clamp(0px, calc(100% - ${A}px - ${Rw}px - 50px), 240px)`, `width:calc(1.5 * clamp(0px, calc(100% - ${A}px - ${Rw}px - 50px), 240px))`)
+      .replace('aspect-ratio: 3 / 1', 'aspect-ratio: 12 / 5').replace('transform: translate(-50%,-50%);', 'transform: translate(-50%,-70%);');
     css += `
-    /* 4 · "2027" — konfeti katmanı (hafif süzülür) */
-    .logo-container::before { content:'' !important; ${sceneK} z-index:1 !important;
-      background:url("${A2}xmas2-konfeti.webp") center / contain no-repeat !important; animation: x2Konfeti 4.5s ease-in-out infinite !important; }
+    /* 4 · "2027" — kutlama: iki kadife patlangaç konfeti fırlatır, ardından 3 peluş havai fişek (roket + patlama) — 4.5 sn döngü */
+    .logo-container::before { content:'' !important; ${sceneFX} z-index:1 !important;
+      background:url("${A2}xmas2-fx.webp") center / contain no-repeat !important; animation: none !important; }
     /* 4 · "2027" — kadife altın yazı */
     .hdr-main-content-bc::after { content:'' !important; ${scene} z-index:3 !important;
       background:url("${A2}xmas2-2027.webp") center / contain no-repeat !important;
@@ -112,13 +145,7 @@
       transform-origin: 50% 100% !important; animation: x2Hop 4.5s ease-in-out infinite !important; opacity: 0 !important; }`;   // kadifede ışık süpürmesi yok — katman kapalı
     log.push(`🎆 Header boşluğu: affiliate sağı=${A}px | sağ grup genişliği=${Rw}px | boşluk=${Math.round(hmR.width - A - Rw)}px → sahne ${Math.max(0, Math.min(240, Math.round(hmR.width - A - Rw - 50)))}px`);
   } else {
-    // Mobile: logo arkasında Jester havai fişeği
-    const jf = 64;
-    css += `
-    .logo::before { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:-1 !important;
-      left:${jx - jf / 2}px !important; top:${jy - jf / 2}px !important; width:${jf}px !important; height:${jf}px !important;
-      background:url("${CDN}xmas-fw-jester.webp") center / contain no-repeat !important; opacity:0;
-      animation: xmasBurst 5s ease-out 1.2s infinite !important; }`;
+    // Mobile: header'da 2027'ye yer yok → kutlama logodaki şapkanın arkasında (aşağıda, logo bloğunda)
   }
 
   // ── 5b) Dönen border'lar → gold-şampanya (custom.css'teki conic-gradient kuralları klonlanır)
@@ -140,7 +167,7 @@
   recol.slice(0, 12).forEach((s) => log.push(`     • ${s.slice(0, 110)}`));
 
 
-  // ── Tematik logo: orijinal harfler + kadife kırmızı-beyaz Jester şapkası (orijinal img görünmez, aynı kutuya yeni logo)
+  // ── Tematik logo: kadife harfler (32) + büyütülmüş kırmızı-beyaz Jester (29), ayrı katman (orijinal img görünmez, aynı kutuya yeni logo)
   {
     const logo = $('.logo'), lr = logo ? R(logo) : null, ir = img ? R(img) : null;
     const lift = isMob ? 0 : -7.4;   // web: "t" harfi Affiliate ile hizalı
@@ -149,10 +176,19 @@
       background: url("${A2}xmas2-logo-letters.webp") left center / contain no-repeat border-box !important;
       ${lift ? `transform: translateY(${lift}px) !important;` : ''} }
     .logo::after { content: none !important; }`;
+    if (isMob && logo && img) {
+      // mobile kutlama: şapkanın arkasında iki peluş havai fişek (4.5 sn döngü)
+      const bw = ir.width, bh = ir.height, rw = Math.min(bw, bh * 720 / 267), rh = rw * 267 / 720, oy = (bh - rh) / 2;
+      const cx = ir.left - lr.left + 60 / 720 * rw, cy = ir.top - lr.top + oy + 57 / 267 * rh, fw = 150, fh = 100;
+      css += `
+    .logo::after { content: "" !important; position: absolute !important; pointer-events: none !important; z-index: -1 !important;
+      left: ${Math.round(cx - fw / 2)}px !important; top: ${Math.round(cy - fh / 2)}px !important; width: ${fw}px !important; height: ${fh}px !important;
+      background: url("${A2}xmas2-fx-mob.webp") center / contain no-repeat !important; animation: none !important; opacity: 1 !important; }`;
+    }
     if (logo && img) {
       // şapka katmanı img kutusunun birebir üstüne; şapka tabanı (J'nin üstü) dönme/esneme merkezi
-      const bw = ir.width, bh = ir.height, rw = Math.min(bw, bh * 720 / 228), rh = rw * 228 / 720, oy = (bh - rh) / 2;
-      const ox = Math.round(80 / 720 * rw * 10) / 10, oyy = Math.round((oy + 112 / 228 * rh) * 10) / 10;
+      const bw = ir.width, bh = ir.height, rw = Math.min(bw, bh * 720 / 267), rh = rw * 267 / 720, oy = (bh - rh) / 2;
+      const ox = Math.round(60 / 720 * rw * 10) / 10, oyy = Math.round((oy + 103 / 267 * rh) * 10) / 10;   // Jester'ın kürk bandının ortası
       css += `
     .logo { position: relative !important; }
     .logo::before { content: "" !important; position: absolute !important; pointer-events: none !important; z-index: 2 !important; opacity: 1 !important;
@@ -337,7 +373,7 @@
     @media (prefers-reduced-motion: reduce) {
       .logo::before, .logo::after, .header-bc::before, .header-bc::after, .hdr-main-content-bc::before, .hdr-main-content-bc::after,
       .layout-header-holder-bc::before, .layout-header-holder-bc::after, .logo-container::before, .logo-container::after,
-      .layout-content-holder-bc *::before, .layout-content-holder-bc *::after, .sectionTitle::before, .sectionTitle::after, .sectionTitleText::before, .sectionTitleText::after, .hm-row-bc.has-slider::before, .hm-row-bc.has-slider::after { animation: none !important; transition: none !important; }
+      .layout-content-holder-bc *::before, .layout-content-holder-bc *::after, .sectionTitle::before, .sectionTitle::after, .sectionTitleText::before, .sectionTitleText::after, .hm-row-bc.has-slider::before, .hm-row-bc.has-slider::after, .hm-row-bc.has-slider *::before, .hm-row-bc.has-slider *::after { animation: none !important; transition: none !important; }
     }`;
 
   const st = document.createElement('style');
