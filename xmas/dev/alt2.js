@@ -200,14 +200,14 @@
       filter: drop-shadow(0 0 8px rgba(251,191,36,.45)); transform-origin: 50% 100% !important; animation: x2Hop 4.5s ease-in-out infinite !important; }
     /* 4 · "2027" — solda hediye yüklü kızak, sağda onu çeken ren geyiği (yalnızca yeterli boşluk varsa) */
     .logo-container::after { content:'' !important; display:none !important; }`;
-    const minVW = Math.ceil(innerWidth - (hmR.width - A - Rw) + 490);
+    const minVW = Math.ceil(innerWidth - (hmR.width - A - Rw) + 470);
     css += `
     @keyframes x2Bob { 0%,100% { transform: translate(-50%,-50%) translateY(0); } 50% { transform: translate(-50%,-50%) translateY(-2px); } }
     @media (min-width: ${minVW}px) {
       .logo-container::after { display:block !important; position:absolute !important; pointer-events:none !important; z-index:0 !important;
         left:calc((${A}px + 100% - ${Rw}px) / 2) !important; top:60% !important; height:56px !important;
-        width:calc(1.5 * clamp(0px, calc(100% - ${A}px - ${Rw}px - 50px), 240px) + 128px) !important;
-        background: url("${A2}xmas2-sleigh.webp") left bottom / auto 48px no-repeat, url("${A2}xmas2-reindeer.webp") right bottom / auto 52px no-repeat !important;
+        width:calc(1.5 * clamp(0px, calc(100% - ${A}px - ${Rw}px - 50px), 240px) + 104px) !important;
+        background: url("${A2}xmas2-sleigh.webp") left bottom / auto 44px no-repeat, url("${A2}xmas2-reindeer.webp") right bottom / auto 48px no-repeat !important;
         -webkit-mask:none; mask:none; opacity:1 !important; filter: drop-shadow(0 3px 4px rgba(0,0,0,.45));
         animation: x2Bob 2.6s ease-in-out infinite !important; }
     }`;
