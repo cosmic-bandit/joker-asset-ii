@@ -146,7 +146,7 @@
 
 
   // ══ ORTA BÖLÜM ════════════════════════════════════════════
-  const MID = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@c807e851db1c/xmas/';
+  const MID = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@b9890b5e2228/xmas/';
   css += `
     @keyframes xmasSprig { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
     @keyframes xmasHang  { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }`;
