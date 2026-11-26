@@ -90,8 +90,8 @@
     // ── 2b) Köşe süslerinden örgü iplerle sarkan kadife süsler (her ip ayrı sallanır)
     const k = cw / 300;
     const ROPES = {
-      L: [{ x: 150, len: 62, o: 'ball', w: 34, h: 31 }, { x: 205, len: 100, o: 'star', w: 30, h: 27 }, { x: 262, len: 46, o: 'bells', w: 38, h: 35 }],
-      R: [{ x: 150, len: 86, o: 'disco2', w: 32, h: 29 }, { x: 205, len: 50, o: 'gift', w: 33, h: 31 }, { x: 262, len: 104, o: 'sock', w: 29, h: 36 }],
+      L: [{ x: 150, len: 66, o: 'ball', w: 46, h: 42 }, { x: 208, len: 112, o: 'star', w: 42, h: 37 }, { x: 266, len: 50, o: 'bells', w: 52, h: 48 }],
+      R: [{ x: 150, len: 94, o: 'disco2', w: 44, h: 40 }, { x: 208, len: 54, o: 'gift', w: 46, h: 42 }, { x: 266, len: 116, o: 'sock', w: 40, h: 49 }],
     };
     const HOST = (side) => [`.hm-row-bc.has-slider > .hm-row-bc-inner::${side}`, `.hm-row-bc.has-slider .slider-bc::${side}`, `.hm-row-bc.has-slider .slider-bc > :first-child::${side}`];
     const SW = ['x2SwingA 3.1s', 'x2SwingB 3.8s', 'x2SwingC 4.4s'];
@@ -110,7 +110,7 @@
         css += `
     ${sel} { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:15 !important;
       top:${f1(off.t + 30 * k)}px !important; ${edge}:${f1(off.s + r.x * k - w / 2)}px !important; width:${f1(w)}px !important; height:${f1(len + h)}px !important;
-      background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope.webp") center top / ${f1(8 * k)}px auto no-repeat !important;
+      background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope.webp") center top / ${f1(9 * k)}px auto no-repeat !important;
       filter: drop-shadow(0 4px 5px rgba(0,0,0,.45)); transform-origin: 50% 0 !important;
       animation: ${SW[i]} ease-in-out ${key === 'R' ? -1.3 * (i + 1) : -0.7 * i}s infinite alternate !important; }`;
         hostsOK.push(`${key}${i + 1}:${r.o}`);
