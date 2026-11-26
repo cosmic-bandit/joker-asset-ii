@@ -1,4 +1,4 @@
-// 🎄 Yılbaşı — ALTERNATİF 2 (kadife ikon seti) | birinci alternatifle aynı yerleşim, sadece görsel assetler farklı | WEB + MOBILE
+// 🎄 Yılbaşı — ALTERNATİF 2 (kadife ikon seti) | birinci alternatifle aynı yerleşim; görseller ve hareket dili (peluş oyuncak fiziği) farklı | WEB + MOBILE
 (() => {
   ['xmas-test-v1', 'xmas-test-v2', 'xmas-test-v3', 'xmas-test-v4', 'xmas-test-v5', 'xmas-test-v6', 'xmas-test-v7', 'xmas-test-v8', 'xmas-test-v9', 'xmas-test-v10', 'xmas-alt2'].forEach((id) => document.getElementById(id)?.remove());
   const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@594d5d488257/xmas/';
@@ -23,7 +23,16 @@
     @keyframes xmasBow     { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
     @keyframes xmasSweep   { 0% { background-position: 140% 0; } 22%,100% { background-position: -40% 0; } }
     @keyframes xmasGlow    { 0%,100% { opacity:.35; } 50% { opacity:1; } }
-    @keyframes xmasKonfeti { 0%,100% { transform: translate(-50%,-50%) rotate(-2deg) scale(1); } 50% { transform: translate(-50%,-54%) rotate(2deg) scale(1.03); } }
+    /* ── Alternatif 2 hareket dili: peluş oyuncak fiziği — uzun bekleme, sonra yumuşak zıplama / esneme / sönümlü sallanma ── */
+    @keyframes x2Hop      { 0%,68%,100% { transform: translate(-50%,-50%) scale(1,1); } 72% { transform: translate(-50%,-50%) scale(1.08,.9); } 78% { transform: translate(-50%,-64%) scale(.94,1.08); } 84% { transform: translate(-50%,-50%) scale(1.06,.93); } 89% { transform: translate(-50%,-50%) scale(.98,1.03); } 94% { transform: translate(-50%,-50%) scale(1.01,.99); } }
+    @keyframes x2Konfeti  { 0%,100% { transform: translate(-50%,-50%) rotate(-2deg) scale(1); } 40% { transform: translate(-50%,-53%) rotate(1.5deg) scale(1.01); } 82% { transform: translate(-50%,-51%) rotate(0deg) scale(1); } 86% { transform: translate(-50%,-52%) rotate(2deg) scale(1.09); } 92% { transform: translate(-50%,-51%) rotate(-1deg) scale(.99); } }
+    @keyframes x2Bungee   { 0%,78%,100% { transform: scaleY(1); } 82% { transform: scaleY(1.07); } 86% { transform: scaleY(.96); } 90% { transform: scaleY(1.03); } 94% { transform: scaleY(.99); } }
+    @keyframes x2WobbleL  { 0%,58%,100% { transform: rotate(0deg); } 64% { transform: rotate(2.2deg); } 70% { transform: rotate(-1.4deg); } 76% { transform: rotate(.8deg); } 82% { transform: rotate(-.35deg); } 88% { transform: rotate(0deg); } }
+    @keyframes x2WobbleR  { 0%,58%,100% { transform: rotate(0deg); } 64% { transform: rotate(-2.2deg); } 70% { transform: rotate(1.4deg); } 76% { transform: rotate(-.8deg); } 82% { transform: rotate(.35deg); } 88% { transform: rotate(0deg); } }
+    @keyframes x2HatBoing { 0%,72%,100% { transform: scale(1,1) rotate(0deg); } 76% { transform: scale(1.07,.88) rotate(0deg); } 81% { transform: scale(.94,1.1) rotate(-5deg); } 86% { transform: scale(1.03,.96) rotate(3deg); } 91% { transform: scale(.99,1.02) rotate(-1.5deg); } 96% { transform: scale(1,1) rotate(.5deg); } }
+    @keyframes x2Sprig    { 0%,66%,100% { transform: rotate(0deg); } 72% { transform: rotate(-9deg); } 78% { transform: rotate(6deg); } 84% { transform: rotate(-3deg); } 90% { transform: rotate(1deg); } }
+    @keyframes x2Ding     { 0%,52%,100% { transform: rotate(0deg); } 57% { transform: rotate(16deg); } 63% { transform: rotate(-11deg); } 69% { transform: rotate(7deg); } 75% { transform: rotate(-4deg); } 81% { transform: rotate(2deg); } 87% { transform: rotate(-.8deg); } 93% { transform: rotate(0deg); } }
+    @keyframes x2CornerZ  { from { z-index: 1000; } to { z-index: 20; } }
     @keyframes xmas2027    { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.04); } }
   `;
   const SHEEN = `linear-gradient(115deg, transparent 38%, rgba(255,248,225,.0) 42%, rgba(255,248,225,.85) 50%, rgba(255,248,225,0) 58%, transparent 62%) 0 0 / 300% 100% no-repeat`;
@@ -41,24 +50,15 @@
       animation: xmasGlint 4.5s ease-in-out infinite !important; }`;
   log.push(`👑 Jester merkezi: x=${jx} y=${jy}`);
 
-  // ── 6) Işık zinciri v2 — sönük taban + 4 grup düzensiz yanıp sönme
+  // ── 6) Kadife girland
   const hdrBottomInHm = Math.round(R(hdr).bottom - hmR.top);
-  const litSel = isMob ? '.hdr-main-content-bc::after' : '.hdr-main-content-bc::before';
-  const G = (k) => `url("${A2}xmas2-glint-g${k}.webp")`;
   const GH = isMob ? 36 : 46, GW = Math.round(GH * 294 / 96 * 10) / 10;   // kadife girland karesi
   css += `
-    @keyframes xmasTwinkle { 0% { background-position: 0 0, 0 -60px, 0 -60px, 0 -60px; } 3% { background-position: 0 0, 0 -60px, 0 -60px, 0 0; } 8% { background-position: 0 0, 0 0, 0 -60px, 0 0; } 9% { background-position: 0 0, 0 0, 0 -60px, 0 -60px; } 12% { background-position: 0 -60px, 0 0, 0 -60px, 0 -60px; } 18% { background-position: 0 -60px, 0 0, 0 0, 0 -60px; } 25% { background-position: 0 -60px, 0 -60px, 0 0, 0 -60px; } 30% { background-position: 0 0, 0 -60px, 0 0, 0 -60px; } 34% { background-position: 0 0, 0 -60px, 0 -60px, 0 -60px; } 36% { background-position: 0 0, 0 -60px, 0 -60px, 0 0; } 44% { background-position: 0 0, 0 -60px, 0 0, 0 0; } 45% { background-position: 0 -60px, 0 -60px, 0 0, 0 0; } 50% { background-position: 0 -60px, 0 -60px, 0 0, 0 -60px; } 52% { background-position: 0 -60px, 0 0, 0 0, 0 -60px; } 58% { background-position: 0 -60px, 0 0, 0 -60px, 0 -60px; } 60% { background-position: 0 -60px, 0 -60px, 0 -60px, 0 -60px; } 62% { background-position: 0 -60px, 0 -60px, 0 -60px, 0 0; } 70% { background-position: 0 0, 0 -60px, 0 -60px, 0 0; } 74% { background-position: 0 0, 0 -60px, 0 -60px, 0 -60px; } 78% { background-position: 0 -60px, 0 -60px, 0 -60px, 0 -60px; } 82% { background-position: 0 -60px, 0 0, 0 -60px, 0 -60px; } 88% { background-position: 0 -60px, 0 0, 0 0, 0 -60px; } 92% { background-position: 0 -60px, 0 0, 0 0, 0 0; } 96% { background-position: 0 -60px, 0 -60px, 0 0, 0 0; } 97% { background-position: 0 -60px, 0 -60px, 0 0, 0 -60px; } 100% { background-position: 0 -60px, 0 -60px, 0 0, 0 -60px; } }
-    /* 6 · Kadife girland (kurdeleli çam kuşağı) */
+    /* 6 · Kadife girland (kurdeleli çam kuşağı) — 6 sn'de bir lastik gibi esneyip yerine oturur */
     .header-bc::after { content:'' !important; position:absolute !important; left:0 !important; right:0 !important; bottom:-${GH - 6}px !important; height:${GH}px !important;
-      pointer-events:none !important; z-index:1 !important; animation:none !important;
-      background:url("${A2}xmas2-garland.webp") 0 0 / ${GW}px ${GH}px repeat-x !important; filter: drop-shadow(0 3px 4px rgba(0,0,0,.5)); }
-    /* 6 · Girland toplarında parıltı (4 grup, düzensiz takvim) */
-    ${litSel} { content:'' !important; position:absolute !important; left:0 !important; right:0 !important; top:${hdrBottomInHm - 6}px !important; height:${GH}px !important;
-      pointer-events:none !important; z-index:2 !important;
-      background-image:${G(0)}, ${G(1)}, ${G(2)}, ${G(3)} !important;
-      background-size:${GW}px ${GH}px !important; background-repeat:repeat-x !important;
-      background-position:0 0, 0 -60px, 0 -60px, 0 -60px;
-      animation: xmasTwinkle 8s step-end infinite !important; }`;
+      pointer-events:none !important; z-index:1 !important;
+      background:url("${A2}xmas2-garland.webp") 0 0 / ${GW}px ${GH}px repeat-x !important; filter: drop-shadow(0 3px 4px rgba(0,0,0,.5));
+      transform-origin: 50% 0; animation: x2Bungee 6s cubic-bezier(.3,.7,.4,1) 1s infinite !important; }`;
   log.push(`💡 Header alt kenarı (hdr-main-content'e göre): ${hdrBottomInHm}px`);
 
   // ── 1+2) Slider köşe süsleri — sol ve sağ üst köşeye yaslanır
@@ -68,21 +68,23 @@
     const hl = Math.round(cw * 603 / 900), hr = hl;
     const off = isMob ? { t: -4, s: -4 } : { t: -12, s: -12 };
     css += `
-    @keyframes xmasSwayL { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(1deg); } }
-    @keyframes xmasSwayR { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-1deg); } }
     .hm-row-bc.has-slider { position: relative !important; }
-    /* Sol üst köşe */
-    .hm-row-bc.has-slider::before { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:5 !important;
+    /* Sol üst köşe — en üst katman */
+    .hm-row-bc.has-slider::before { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:20;
       top:${off.t}px !important; left:${off.s}px !important; width:${cw}px !important; height:${hl}px !important;
       background:url("${A2}xmas2-corner-l.webp") left top / contain no-repeat !important;
       transform-origin: 0 0 !important; filter: drop-shadow(0 6px 10px rgba(0,0,0,.4));
-      animation: xmasSwayL 6s ease-in-out infinite !important; }
-    /* Sağ üst köşe */
-    .hm-row-bc.has-slider::after { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:5 !important;
+      animation: x2WobbleL 7s cubic-bezier(.3,.7,.4,1) infinite, x2CornerZ linear both !important;
+      animation-timeline: auto, scroll(root) !important; animation-range: normal, 0px 12px !important; }
+    /* Sağ üst köşe — en üst katman */
+    .hm-row-bc.has-slider::after { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:20;
       top:${off.t}px !important; right:${off.s}px !important; width:${cw}px !important; height:${hr}px !important;
       background:url("${A2}xmas2-corner-r.webp") right top / contain no-repeat !important;
       transform-origin: 100% 0 !important; filter: drop-shadow(0 6px 10px rgba(0,0,0,.4));
-      animation: xmasSwayR 7s ease-in-out .8s infinite !important; }`;
+      animation: x2WobbleR 7s cubic-bezier(.3,.7,.4,1) 1.4s infinite, x2CornerZ linear both !important;
+      animation-timeline: auto, scroll(root) !important; animation-range: normal, 0px 12px !important; }`;
+    // z-index: sayfa en üstteyken 1000 (header girlandının ve slider sayacının da üstünde); 12px kaydırınca 20'ye iner → sticky header'ın üstüne taşmaz.
+    // Kaydırmaya bağlı animasyonu desteklemeyen tarayıcıda sabit 20 kalır (slider'ın kendi öğelerinin üstünde).
     log.push(`🌲 Köşe süsleri: ${cw}px genişlik`);
   }
 
@@ -99,15 +101,15 @@
     css += `
     /* 4 · "2027" — konfeti katmanı (hafif süzülür) */
     .logo-container::before { content:'' !important; ${sceneK} z-index:1 !important;
-      background:url("${A2}xmas2-konfeti.webp") center / contain no-repeat !important; animation: xmasKonfeti 5s ease-in-out infinite !important; }
+      background:url("${A2}xmas2-konfeti.webp") center / contain no-repeat !important; animation: x2Konfeti 4.5s ease-in-out infinite !important; }
     /* 4 · "2027" — kadife altın yazı */
     .hdr-main-content-bc::after { content:'' !important; ${scene} z-index:3 !important;
       background:url("${A2}xmas2-2027.webp") center / contain no-repeat !important;
-      filter: drop-shadow(0 0 8px rgba(251,191,36,.45)); animation: xmas2027 3.2s ease-in-out infinite !important; }
+      filter: drop-shadow(0 0 8px rgba(251,191,36,.45)); transform-origin: 50% 100% !important; animation: x2Hop 4.5s ease-in-out infinite !important; }
     /* 4 · "2027" — yazının üstünden ışık geçişi */
     .logo-container::after { content:'' !important; ${scene} z-index:4 !important;
       background:${SHEEN}; -webkit-mask:url("${A2}xmas2-2027.webp") center / contain no-repeat; mask:url("${A2}xmas2-2027.webp") center / contain no-repeat;
-      animation: xmasSweep 4.5s ease-in-out .5s infinite !important; }`;
+      transform-origin: 50% 100% !important; animation: x2Hop 4.5s ease-in-out infinite !important; opacity: 0 !important; }`;   // kadifede ışık süpürmesi yok — katman kapalı
     log.push(`🎆 Header boşluğu: affiliate sağı=${A}px | sağ grup genişliği=${Rw}px | boşluk=${Math.round(hmR.width - A - Rw)}px → sahne ${Math.max(0, Math.min(240, Math.round(hmR.width - A - Rw - 50)))}px`);
   } else {
     // Mobile: logo arkasında Jester havai fişeği
@@ -139,21 +141,35 @@
 
 
   // ── Tematik logo: orijinal harfler + kadife kırmızı-beyaz Jester şapkası (orijinal img görünmez, aynı kutuya yeni logo)
-  css += `
+  {
+    const logo = $('.logo'), lr = logo ? R(logo) : null, ir = img ? R(img) : null;
+    const lift = isMob ? 0 : -7.4;   // web: "t" harfi Affiliate ile hizalı
+    css += `
     img.hdr-logo-bc { object-position: -99999px 0 !important;
-      background: url("${A2}xmas2-logo.webp") left center / contain no-repeat border-box !important; }
-    .logo::before, .logo::after { content: none !important; }`;
-  // Web: "t" harfi Affiliate butonunun dikey ortasına hizalı (bu logoda ölçek gerekmez, şapka header içinde kalır)
-  if (!isMob) css += `
-    img.hdr-logo-bc { transform: translateY(-7.4px) !important; }`;
+      background: url("${A2}xmas2-logo-letters.webp") left center / contain no-repeat border-box !important;
+      ${lift ? `transform: translateY(${lift}px) !important;` : ''} }
+    .logo::after { content: none !important; }`;
+    if (logo && img) {
+      // şapka katmanı img kutusunun birebir üstüne; şapka tabanı (J'nin üstü) dönme/esneme merkezi
+      const bw = ir.width, bh = ir.height, rw = Math.min(bw, bh * 720 / 228), rh = rw * 228 / 720, oy = (bh - rh) / 2;
+      const ox = Math.round(80 / 720 * rw * 10) / 10, oyy = Math.round((oy + 112 / 228 * rh) * 10) / 10;
+      css += `
+    .logo { position: relative !important; }
+    .logo::before { content: "" !important; position: absolute !important; pointer-events: none !important; z-index: 2 !important; opacity: 1 !important;
+      left: ${Math.round((ir.left - lr.left) * 10) / 10}px !important; top: ${Math.round((ir.top - lr.top - (img.style.transform ? 0 : 0)) * 10) / 10}px !important;
+      width: ${bw}px !important; height: ${bh}px !important;
+      background: url("${A2}xmas2-logo-hat.webp") left center / contain no-repeat !important;
+      ${lift ? `translate: 0 ${lift}px;` : ''}
+      transform-origin: ${ox}px ${oyy}px !important; animation: x2HatBoing 5s cubic-bezier(.3,.7,.4,1) 2s infinite !important; }`;
+    }
+  }
   log.push('🎅 Logo: kadife Jester şapkası' + (isMob ? '' : ' (t ↔ Affiliate hizalı)'));
 
 
   // ══ ORTA BÖLÜM ════════════════════════════════════════════
   const MID = A2;
   css += `
-    @keyframes xmasSprig { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
-    @keyframes xmasHang  { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }`;
+`;
 
   // ── 7) Bölüm başlıklarının önüne çam dalı + kokina
   if ($('.sectionTitleText') && free($('.sectionTitleText'), '::before')) {
@@ -161,7 +177,9 @@
     .sectionTitleText::before { content: "" !important; display: inline-block !important;
       width: ${isMob ? 34 : 42}px !important; height: ${isMob ? 22 : 27}px !important; margin: -6px 8px -6px -2px !important; vertical-align: middle !important;
       background: url("${MID}xmas2-sprig.webp") center / contain no-repeat !important;
-      transform-origin: 15% 60%; animation: xmasSprig 5s ease-in-out infinite; }`;
+      transform-origin: 10% 70%; animation: x2Sprig 5s cubic-bezier(.3,.7,.4,1) infinite; }
+    .hm-row-bc:nth-child(even) .sectionTitleText::before { animation-delay: -1.7s; }
+    .hm-row-bc:nth-child(3n) .sectionTitleText::before { animation-delay: -3.3s; }`;
     log.push(`🌿 Başlık dalı: ${document.querySelectorAll('.sectionTitleText').length} başlık`);
   }
 
@@ -179,8 +197,9 @@
         linear-gradient(${ROPE}, ${ROPE}) 11px 0 / 1px 10px no-repeat,
         url("${MID}xmas2-orn-disco.webp") 26px 4px / 20px 18px no-repeat,
         linear-gradient(${ROPE}, ${ROPE}) 36px 0 / 1px 5px no-repeat !important;
-      filter: drop-shadow(0 2px 3px rgba(0,0,0,.45)); transform-origin: 50% 0; animation: xmasHang 4.6s ease-in-out infinite; }
-    .hm-row-bc:nth-child(even) .sectionTitleText::after { animation-delay: -2.1s; }`;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.45)); transform-origin: 50% 0; animation: x2Ding 6s cubic-bezier(.3,.7,.4,1) infinite; }
+    .hm-row-bc:nth-child(even) .sectionTitleText::after { animation-delay: -2.4s; }
+    .hm-row-bc:nth-child(3n) .sectionTitleText::after { animation-delay: -4.1s; }`;
     log.push('🔮 Sarkan süsler (mobile): başlık metninin arkasında');
   } else if (!isMob && st0 && free(st0, '::before') && free(st0, '::after')) {
     const k = isMob ? 0.75 : 1;
@@ -193,13 +212,16 @@
     .sectionTitle { position: relative !important; }
     .sectionTitle::before, .sectionTitle::after { content: "" !important; position: absolute !important; top: ${up}px !important;
       pointer-events: none !important; z-index: 2 !important; transform-origin: 50% 0;
-      filter: drop-shadow(0 3px 4px rgba(0,0,0,.45)); animation: xmasHang 4.2s ease-in-out infinite; }
+      filter: drop-shadow(0 3px 4px rgba(0,0,0,.45)); animation: x2Ding 6s cubic-bezier(.3,.7,.4,1) infinite; }
     .sectionTitle::before { left: ${P[0]} !important; width: ${g.w}px !important; height: ${g.t + g.h}px !important;
       background: url("${MID}xmas2-orn-red.webp") center bottom / ${g.w}px ${g.h}px no-repeat, ${ROPE(g.t)} !important; }
     .sectionTitle::after { left: ${P[1]} !important; width: ${v.w}px !important; height: ${v.t + v.h}px !important;
       background: url("${MID}xmas2-orn-disco.webp") center bottom / ${v.w}px ${v.h}px no-repeat, ${ROPE(v.t)} !important;
-      animation-duration: 5.1s; animation-delay: -1.3s; }
-    .hm-row-bc:nth-child(even) .sectionTitle::before { left: ${P[2]} !important; animation-delay: -2s; }
+      animation-delay: .35s; }
+    .hm-row-bc:nth-child(even) .sectionTitle::before { left: ${P[2]} !important; animation-delay: -2.4s; }
+    .hm-row-bc:nth-child(even) .sectionTitle::after  { animation-delay: -2.05s; }
+    .hm-row-bc:nth-child(3n) .sectionTitle::before { animation-delay: -4.1s; }
+    .hm-row-bc:nth-child(3n) .sectionTitle::after  { animation-delay: -3.75s; }
     .hm-row-bc:nth-child(even) .sectionTitle::after  { left: ${P[3]} !important; }
     .hm-row-bc:nth-child(3n) .sectionTitle::before { left: ${P[5]} !important; }
     .hm-row-bc:nth-child(3n) .sectionTitle::after  { left: ${P[4]} !important; }`;
@@ -216,7 +238,8 @@
     return `content: "" !important; position: absolute !important; pointer-events: none !important; z-index: 6 !important;
       height: ${h}px !important; background: ${SNOW_BG(h, 0)} !important;
       -webkit-mask: ${M}; mask: ${M};
-      filter: drop-shadow(0 1px 1.5px rgba(10,5,30,.35));`;
+      filter: drop-shadow(0 1px 1.5px rgba(10,5,30,.35));
+      transform-origin: 50% 0; transition: transform .5s cubic-bezier(.34,1.8,.5,1);`;
   };
   const snowT = [
     // [seçici, pseudo, top, yan boşluk, yükseklik, position ekle?]
@@ -241,7 +264,8 @@
     ${needPos ? `${sel} { position: relative !important; }` : ''}
     ${sel}${ps} { ${SNOW(sh)} top: ${top}px !important; left: ${side}px !important; right: ${side}px !important; }
     ${sel}:nth-child(3n+2)${ps} { background: ${SNOW_BG(sh, -19)} !important; }
-    ${sel}:nth-child(3n)${ps} { background: ${SNOW_BG(sh, -38)} !important; }`;
+    ${sel}:nth-child(3n)${ps} { background: ${SNOW_BG(sh, -38)} !important; }
+    ${sel}:hover${ps} { transform: scale(1.03, .78); }`;
     snowOK.push(sel);
   });
   log.push(`❄️ Kar birikintisi: ${snowOK.length} kart tipi → ${snowOK.join(', ')}`);
@@ -256,26 +280,30 @@
       const ml = parseFloat(getComputedStyle(hcbA).marginLeft) || 0;   // buton, sarmalayıcının içinde soldan boşluklu
       css += `
     .header-custom-buttons { position: relative !important; }
-    .header-custom-buttons::after { ${SNOW(hH)} top: -2px !important; left: ${ml + side}px !important; right: ${side}px !important; }`;
+    .header-custom-buttons::after { ${SNOW(hH)} top: -2px !important; left: ${ml + side}px !important; right: ${side}px !important; }
+    .header-custom-buttons:hover::after { transform: scale(1.04, .75); }`;
       done.push('özel butonlar');
     }
     if (reg && free(reg, '::after')) {
       css += `
     .hdr-user-bc .register { position: relative !important; }
-    .hdr-user-bc .register::after { ${SNOW(hH)} top: -2px !important; left: ${side}px !important; right: ${side}px !important; }`;
+    .hdr-user-bc .register::after { ${SNOW(hH)} top: -2px !important; left: ${side}px !important; right: ${side}px !important; }
+    .hdr-user-bc .register:hover::after { transform: scale(1.04, .75); }`;
       done.push('Kayıt');
     }
     if (signIn && free(signIn, '::after')) {               // mobile: Giriş'in ::after'ı boş
       css += `
     .hdr-user-bc .sign-in { position: relative !important; }
-    .hdr-user-bc .sign-in::after { ${SNOW(hH)} top: -2px !important; left: ${side}px !important; right: ${side}px !important; }`;
+    .hdr-user-bc .sign-in::after { ${SNOW(hH)} top: -2px !important; left: ${side}px !important; right: ${side}px !important; }
+    .hdr-user-bc .sign-in:hover::after { transform: scale(1.04, .75); }`;
       done.push('Giriş');
     } else if (hub && signIn && free(hub, '::before')) {   // web: Giriş'in iki pseudo'su da dolu → kapsayıcının ::before'u ile üstüne konur
       const hr = R(hub), sr = R(signIn);
       const hubSel = `${cls(hub.parentElement)} > .hdr-user-bc`;
       css += `
     ${hubSel} { position: relative !important; }
-    ${hubSel}::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 2}px !important; right: ${Math.round(hr.right - sr.right) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }`;   // sağdan konum: Kayıt sabit genişlikte, soldaki butonlar daralsa da kaymaz
+    ${hubSel}::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 2}px !important; right: ${Math.round(hr.right - sr.right) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }
+    ${hubSel}:has(.sign-in:hover)::before { transform: scale(1.04, .75); }`;   // sağdan konum: Kayıt sabit genişlikte, soldaki butonlar daralsa da kaymaz
       done.push('Giriş');
     }
     // mobile: BONUSLAR / BONUS TALEP / JOKER TV / TELEGRAM hapları — kendi pseudo'ları dolu (ikon + yazı),
@@ -309,7 +337,7 @@
     @media (prefers-reduced-motion: reduce) {
       .logo::before, .logo::after, .header-bc::before, .header-bc::after, .hdr-main-content-bc::before, .hdr-main-content-bc::after,
       .layout-header-holder-bc::before, .layout-header-holder-bc::after, .logo-container::before, .logo-container::after,
-      .layout-content-holder-bc *::before, .layout-content-holder-bc *::after, .sectionTitle::before, .sectionTitle::after, .sectionTitleText::before, .sectionTitleText::after { animation: none !important; }
+      .layout-content-holder-bc *::before, .layout-content-holder-bc *::after, .sectionTitle::before, .sectionTitle::after, .sectionTitleText::before, .sectionTitleText::after, .hm-row-bc.has-slider::before, .hm-row-bc.has-slider::after { animation: none !important; transition: none !important; }
     }`;
 
   const st = document.createElement('style');
