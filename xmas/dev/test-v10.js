@@ -193,11 +193,11 @@
       filter: drop-shadow(0 1px 1.5px rgba(10,5,30,.35));`;
   const snowT = [
     // [seçici, pseudo, top, yan boşluk, yükseklik, position ekle?]
-    ['.product-banner-container-bc.product-banner-without-titles .product-banner-info-bc', '::after', -4, 10, 16, false],
+    ...(isMob ? [] : [['.product-banner-container-bc.product-banner-without-titles .product-banner-info-bc', '::after', -4, 10, 16, false]]),  // mobile'da bu pseudo'lar custom.css'te dolu
     ['.featuredGamesVersion1 .swiper-slide', '::after', 0, 3, 14, false],
-    ['.expressWidget', '::after', -4, 8, 16, false],
-    ['.bbAiRecBetsItem', '::after', 0, 4, 15, false],
-    ['.casino-big-win-replays-card', '::before', -4, 10, 15, false],
+    ['.expressWidget', '::after', -4, 8, 16, false, true],
+    ['.bbAiRecBetsItem', '::after', 0, 4, 15, false, true],
+    ['.casino-big-win-replays-card', '::before', -4, 10, 15, false, true],
     ['.tournamentsWidget .swiper-slide', '::after', 0, 6, 15, false, true],
     ['.casinoGameItemContent', '::after', 0, 0, 13, false, true],
     ['.casinoRandomGameWidget', '::after', -4, 14, 16, true],
