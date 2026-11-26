@@ -2,7 +2,7 @@
 (() => {
   ['xmas-test-v1', 'xmas-test-v2', 'xmas-test-v3', 'xmas-test-v4', 'xmas-test-v5', 'xmas-test-v6', 'xmas-test-v7', 'xmas-test-v8', 'xmas-test-v9', 'xmas-test-v10', 'xmas-alt2'].forEach((id) => document.getElementById(id)?.remove());
   const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@594d5d488257/xmas/';
-  const A2 = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@2e8fde859472/xmas/alt2/';   // alternatif 2 assetleri
+  const A2 = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@2105f7de8477/xmas/alt2/';   // alternatif 2 assetleri
   const isMob = /is-mobile/.test(document.documentElement.className + ' ' + document.body.className);
   const $ = (s) => document.querySelector(s);
   const cls = (el) => '.' + [...el.classList].join('.');
@@ -107,7 +107,7 @@
       { host: '.hm-row-bc.has-slider .slider-bc > :first-child::after', pct: 52.5, len: 80, o: 'gift', w: 64, h: 60, sw: 'x2SwingA 3.9s', d: -2.2 },
     ];
     const okFree = (sel) => { const [base, ps] = sel.split('::'); const el = $(base); return el && free(el, '::' + ps); };
-    const ORN = (r, w, h, len) => `background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope.webp") center top / ${f1(7 * k)}px auto no-repeat !important;
+    const ORN = (r, w, h, len) => `background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope-tile.webp") center top / ${f1(7 * k)}px auto repeat-y !important;
       filter: drop-shadow(0 4px 5px rgba(0,0,0,.45)); transform-origin: 50% 0 !important;
       width:${f1(w)}px !important; height:${f1(len + h)}px !important;
       animation: ${r.sw} ease-in-out ${r.d}s infinite alternate !important;`;
