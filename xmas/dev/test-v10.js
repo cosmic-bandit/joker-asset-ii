@@ -161,22 +161,29 @@
     log.push(`🌿 Başlık dalı: ${document.querySelectorAll('.sectionTitleText').length} başlık`);
   }
 
-  // ── 8) Bölüm başlığı satırına sarkan süsler (altın küre + mor kristal)
+  // ── 8) Bölüm başlığı satırına sarkan süsler (altın küre + mor kristal, ince altın iple)
   const st0 = $('.sectionTitle');
   if (st0 && free(st0, '::before') && free(st0, '::after')) {
-    const gH = isMob ? 46 : 62, vH = isMob ? 52 : 70, up = isMob ? -22 : -30;
+    const k = isMob ? 0.8 : 1;
+    const g = { w: Math.round(23.5 * k), h: Math.round(30 * k), t: Math.round(28 * k) };   // altın küre
+    const v = { w: Math.round(10 * k), h: Math.round(40 * k), t: Math.round(18 * k) };     // mor kristal
+    const up = isMob ? -22 : -30;
+    const ROPE = (t) => `linear-gradient(rgba(236,198,118,.9), rgba(236,198,118,.9)) center top / 1px ${t}px no-repeat`;
+    const P = isMob ? ['58%', '66%', '70%', '78%', '50%', '59%'] : ['46%', 'calc(46% + 30px)', '57%', 'calc(57% + 26px)', '38%', 'calc(38% + 34px)'];
     css += `
     .sectionTitle { position: relative !important; }
     .sectionTitle::before, .sectionTitle::after { content: "" !important; position: absolute !important; top: ${up}px !important;
-      pointer-events: none !important; z-index: 2 !important; transform-origin: 50% 0; animation: xmasHang 4.2s ease-in-out infinite; }
-    .sectionTitle::before { right: ${isMob ? '34%' : '24%'} !important; width: ${Math.round(gH * 95 / 200)}px !important; height: ${gH}px !important;
-      background: url("${MID}xmas-hang-gold.webp") center top / contain no-repeat !important; }
-    .sectionTitle::after { right: ${isMob ? '26%' : '21%'} !important; width: ${Math.round(vH * 36 / 200)}px !important; height: ${vH}px !important;
-      background: url("${MID}xmas-hang-violet.webp") center top / contain no-repeat !important; animation-duration: 5.1s; animation-delay: -1.3s; }
-    .hm-row-bc:nth-child(even) .sectionTitle::before { right: ${isMob ? '20%' : '33%'} !important; animation-delay: -2s; }
-    .hm-row-bc:nth-child(even) .sectionTitle::after  { right: ${isMob ? '12%' : '30%'} !important; top: ${up - 8}px !important; }
-    .hm-row-bc:nth-child(3n) .sectionTitle::before { right: ${isMob ? '28%' : '15%'} !important; }
-    .hm-row-bc:nth-child(3n) .sectionTitle::after  { right: ${isMob ? '38%' : '18%'} !important; }`;
+      pointer-events: none !important; z-index: 2 !important; transform-origin: 50% 0;
+      filter: drop-shadow(0 3px 4px rgba(0,0,0,.45)); animation: xmasHang 4.2s ease-in-out infinite; }
+    .sectionTitle::before { left: ${P[0]} !important; width: ${g.w}px !important; height: ${g.t + g.h}px !important;
+      background: url("${MID}xmas-orn2-gold.webp") center bottom / ${g.w}px ${g.h}px no-repeat, ${ROPE(g.t)} !important; }
+    .sectionTitle::after { left: ${P[1]} !important; width: ${v.w}px !important; height: ${v.t + v.h}px !important;
+      background: url("${MID}xmas-orn2-violet.webp") center bottom / ${v.w}px ${v.h}px no-repeat, ${ROPE(v.t)} !important;
+      animation-duration: 5.1s; animation-delay: -1.3s; }
+    .hm-row-bc:nth-child(even) .sectionTitle::before { left: ${P[2]} !important; animation-delay: -2s; }
+    .hm-row-bc:nth-child(even) .sectionTitle::after  { left: ${P[3]} !important; }
+    .hm-row-bc:nth-child(3n) .sectionTitle::before { left: ${P[5]} !important; }
+    .hm-row-bc:nth-child(3n) .sectionTitle::after  { left: ${P[4]} !important; }`;
     log.push('🔮 Sarkan süsler: tüm bölüm başlıkları');
   } else log.push('⚠️ .sectionTitle pseudo dolu/yok — sarkan süs atlandı');
 
