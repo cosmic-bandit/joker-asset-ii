@@ -261,12 +261,41 @@
     .hdr-user-bc .register::after { ${SNOW(hH)} top: -1px !important; left: ${side}px !important; right: ${side}px !important; }`;
       done.push('Kayıt');
     }
-    if (hub && signIn && free(hub, '::before')) {   // Giriş'in iki pseudo'su da dolu → kapsayıcının ::before'u ile üstüne konur
-      const hr = R(hub), sr = R(signIn);
+    if (signIn && free(signIn, '::after')) {               // mobile: Giriş'in ::after'ı boş
       css += `
-    .hdr-user-bc { position: relative !important; }
-    .hdr-user-bc::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 1}px !important; right: ${Math.round(hr.right - sr.right) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }`;   // sağdan konum: Kayıt sabit genişlikte, soldaki butonlar daralsa da kaymaz
+    .hdr-user-bc .sign-in { position: relative !important; }
+    .hdr-user-bc .sign-in::after { ${SNOW(hH)} top: -1px !important; left: ${side}px !important; right: ${side}px !important; }`;
       done.push('Giriş');
+    } else if (hub && signIn && free(hub, '::before')) {   // web: Giriş'in iki pseudo'su da dolu → kapsayıcının ::before'u ile üstüne konur
+      const hr = R(hub), sr = R(signIn);
+      const hubSel = `${cls(hub.parentElement)} > .hdr-user-bc`;
+      css += `
+    ${hubSel} { position: relative !important; }
+    ${hubSel}::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 1}px !important; right: ${Math.round(hr.right - sr.right) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }`;   // sağdan konum: Kayıt sabit genişlikte, soldaki butonlar daralsa da kaymaz
+      done.push('Giriş');
+    }
+    // mobile: BONUSLAR / BONUS TALEP / JOKER TV / TELEGRAM hapları — kendi pseudo'ları dolu (ikon + yazı),
+    // tek bir kapsayıcı ::after içinde her hapa ayrı kar katmanı (sol uç + orta + sağ uç) yerleştirilir
+    const pillBox = $('.hdr-additional-info .hdr-user-bc');
+    const pills = pillBox ? [...pillBox.querySelectorAll(':scope > a.user-nav-icon')] : [];
+    if (pills.length && free(pillBox, '::after')) {
+      const ph = isMob ? 9 : 11, cl = ph * 42 / 32, cr = ph * 43 / 32, br = R(pillBox);
+      const f = (n) => Math.round(n * 10) / 10;
+      const layers = [];
+      pills.forEach((a) => {
+        const r = R(a), x = r.left - br.left + 2, w = r.width - 4;
+        layers.push(`url("${MID}xmas-snow2-capl.webp") ${f(x)}px 0 / auto ${ph}px no-repeat`);
+        layers.push(`url("${MID}xmas-snow2-capr.webp") ${f(x + w - cr)}px 0 / auto ${ph}px no-repeat`);
+        layers.push(`url("${MID}xmas-snow2-tile.webp") ${f(x + cl * 0.55)}px 0 / ${f(w - cl * 0.55 - cr * 0.55)}px ${ph}px no-repeat`);
+      });
+      const pt = Math.round(R(pills[0]).top - br.top) - 1;
+      css += `
+    .hdr-additional-info .hdr-user-bc { position: relative !important; }
+    .hdr-additional-info .hdr-user-bc::after { content: "" !important; position: absolute !important; left: 0 !important; right: 0 !important;
+      top: ${pt}px !important; height: ${ph}px !important; pointer-events: none !important; z-index: 6 !important;
+      background: ${layers.join(',\n        ')} !important;
+      filter: drop-shadow(0 1px 1px rgba(10,5,30,.35)); }`;
+      done.push(`${pills.length} hap buton`);
     }
     log.push(`❄️ Header buton karı: ${done.join(', ') || 'yok'}`);
   }
