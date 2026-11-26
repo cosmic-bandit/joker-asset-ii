@@ -2,7 +2,7 @@
 (() => {
   ['xmas-test-v1', 'xmas-test-v2', 'xmas-test-v3', 'xmas-test-v4', 'xmas-test-v5', 'xmas-test-v6', 'xmas-test-v7', 'xmas-test-v8', 'xmas-test-v9', 'xmas-test-v10', 'xmas-alt2'].forEach((id) => document.getElementById(id)?.remove());
   const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@594d5d488257/xmas/';
-  const A2 = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@e78881c61734/xmas/alt2/';   // alternatif 2 assetleri
+  const A2 = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@8c9a8fa4f295/xmas/alt2/';   // alternatif 2 assetleri
   const isMob = /is-mobile/.test(document.documentElement.className + ' ' + document.body.className);
   const $ = (s) => document.querySelector(s);
   const cls = (el) => '.' + [...el.classList].join('.');
@@ -98,11 +98,12 @@
     .hdr-main-content-bc::before { content:'' !important; position:absolute !important; inset:0 !important; z-index:-1 !important; pointer-events:none !important;
       background:
         ${U(lightsSVG)} 0 0 / ${LW}px ${LH}px repeat-x,
+        url("${A2}xmas2-cable-clusters.webp") ${-LW / 2}px 0 / ${LW * 2}px ${Math.round(LW * 2 * 56 / 920)}px repeat-x,
         ${U(starsSVG)} ${isMob ? 40 : 260}px 0 / ${SW}px ${SH}px repeat-x,
         radial-gradient(${lmw}px ${lmh}px at ${lcx}px ${lcy}px, rgba(18,8,36,.92) 0%, rgba(18,8,36,.75) 45%, rgba(18,8,36,0) 100%),
         url("${A2}xmas2-corner-l.webp") left -6px top -4px / auto ${CH}px no-repeat,
         url("${A2}xmas2-corner-r.webp") right -6px top -4px / auto ${CH}px no-repeat !important; }`;
-    log.push(`✨ Header zemini: ışık zinciri (${LW}px kare) + ${stars.length} yıldız/kare + logo maskesi + köşeler (${CH}px)`);
+    log.push(`✨ Header zemini: ışık zinciri + kablo düğümlerinde dal/top/kozalak kümeleri, (${LW}px kare) + ${stars.length} yıldız/kare + logo maskesi + köşeler (${CH}px)`);
   }
 
   // ── 1+2) Slider köşe süsleri — sol ve sağ üst köşeye yaslanır
@@ -197,10 +198,20 @@
     .hdr-main-content-bc::after { content:'' !important; ${scene} z-index:3 !important;
       background:url("${A2}xmas2-2027.webp") center / contain no-repeat !important;
       filter: drop-shadow(0 0 8px rgba(251,191,36,.45)); transform-origin: 50% 100% !important; animation: x2Hop 4.5s ease-in-out infinite !important; }
-    /* 4 · "2027" — yazının üstünden ışık geçişi */
-    .logo-container::after { content:'' !important; ${scene} z-index:4 !important;
-      background:${SHEEN}; -webkit-mask:url("${A2}xmas2-2027.webp") center / contain no-repeat; mask:url("${A2}xmas2-2027.webp") center / contain no-repeat;
-      transform-origin: 50% 100% !important; animation: x2Hop 4.5s ease-in-out infinite !important; opacity: 0 !important; }`;   // kadifede ışık süpürmesi yok — katman kapalı
+    /* 4 · "2027" — solda hediye yüklü kızak, sağda onu çeken ren geyiği (yalnızca yeterli boşluk varsa) */
+    .logo-container::after { content:'' !important; display:none !important; }`;
+    const minVW = Math.ceil(innerWidth - (hmR.width - A - Rw) + 490);
+    css += `
+    @keyframes x2Bob { 0%,100% { transform: translate(-50%,-50%) translateY(0); } 50% { transform: translate(-50%,-50%) translateY(-2px); } }
+    @media (min-width: ${minVW}px) {
+      .logo-container::after { display:block !important; position:absolute !important; pointer-events:none !important; z-index:0 !important;
+        left:calc((${A}px + 100% - ${Rw}px) / 2) !important; top:60% !important; height:56px !important;
+        width:calc(1.5 * clamp(0px, calc(100% - ${A}px - ${Rw}px - 50px), 240px) + 128px) !important;
+        background: url("${A2}xmas2-sleigh.webp") left bottom / auto 48px no-repeat, url("${A2}xmas2-reindeer.webp") right bottom / auto 52px no-repeat !important;
+        -webkit-mask:none; mask:none; opacity:1 !important; filter: drop-shadow(0 3px 4px rgba(0,0,0,.45));
+        animation: x2Bob 2.6s ease-in-out infinite !important; }
+    }`;
+    log.push(`🛷 Kızak + ren geyiği: ${minVW}px ve üstü ekranlarda`);
     log.push(`🎆 Header boşluğu: affiliate sağı=${A}px | sağ grup genişliği=${Rw}px | boşluk=${Math.round(hmR.width - A - Rw)}px → sahne ${Math.max(0, Math.min(240, Math.round(hmR.width - A - Rw - 50)))}px`);
   } else {
     // Mobile: header'da 2027'ye yer yok → kutlama logodaki şapkanın arkasında (aşağıda, logo bloğunda)
