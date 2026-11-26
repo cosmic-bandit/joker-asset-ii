@@ -184,11 +184,11 @@
     log.push('🔮 Sarkan süsler (mobile): başlık metninin arkasında');
   } else if (!isMob && st0 && free(st0, '::before') && free(st0, '::after')) {
     const k = isMob ? 0.75 : 1;
-    const g = { w: Math.round(37 * k), h: Math.round(34 * k), t: Math.round(24 * k) };   // kırmızı kadife top
-    const v = { w: Math.round(33 * k), h: Math.round(30 * k), t: Math.round(12 * k) };     // disko topu
-    const up = isMob ? -20 : -28;
+    const g = { w: Math.round(27 * k), h: Math.round(25 * k), t: Math.round(7 * k) };    // kırmızı kadife top
+    const v = { w: Math.round(24 * k), h: Math.round(22 * k), t: Math.round(3 * k) };     // disko topu
+    const up = 0;   // başlığın üstü çoğu bölümde overflow:hidden ile kesiliyor → süsler başlık satırının içinde asılı
     const ROPE = (t) => `linear-gradient(rgba(236,198,118,.9), rgba(236,198,118,.9)) center top / 1px ${t}px no-repeat`;
-    const P = isMob ? ['58%', '66%', '70%', '78%', '50%', '59%'] : ['46%', 'calc(46% + 48px)', '57%', 'calc(57% + 46px)', '38%', 'calc(38% + 50px)'];
+    const P = isMob ? ['58%', '66%', '70%', '78%', '50%', '59%'] : ['46%', 'calc(46% + 36px)', '57%', 'calc(57% + 34px)', '38%', 'calc(38% + 38px)'];
     css += `
     .sectionTitle { position: relative !important; }
     .sectionTitle::before, .sectionTitle::after { content: "" !important; position: absolute !important; top: ${up}px !important;
