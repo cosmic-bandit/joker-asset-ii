@@ -201,7 +201,8 @@
     ['.tournamentsWidget .swiper-slide', '::after', 0, 6, 15, false],
     ['.casinoGameItemContent', '::after', 0, 0, 13, false],
     ['.casinoRandomGameWidget', '::after', -4, 14, 16, true],
-    ['.jackpot-pool-card', '::after', -4, 10, 14, true],
+    ['.jackpot-pools-widget .swiper-slide', '::after', 0, 6, 14, false],
+    ['.casino-live-wins-container', '::after', -4, 10, 16, true],
   ];
   const snowOK = [];
   snowT.forEach(([sel, ps, top, side, h, needPos]) => {
