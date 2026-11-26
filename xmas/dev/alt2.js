@@ -66,18 +66,27 @@
   {
     const STAR = 'data:image/webp;base64,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';
     const LH = isMob ? 30 : 40, LW = isMob ? 170 : 230;                       // ışık karesi
-    // beyaz kablo (sarkık kavis) + 4 ampul; her ampul kendi ritminde yanıp söner (SVG içi animasyon)
-    const bulbs = [[0.16, 3.1, 0], [0.38, 2.4, -1.2], [0.63, 3.7, -0.5], [0.86, 2.8, -2.1]];
+    // beyaz kablo (sarkık kavis) — tekrar eden desen
     const cy = (t) => 3 + Math.sin(Math.PI * t) * (LH * 0.32);              // kablonun t noktasındaki yüksekliği
-    const lightsSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='${LW}' height='${LH}' viewBox='0 0 ${LW} ${LH}'>
+    const cableSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='${LW}' height='${LH}' viewBox='0 0 ${LW} ${LH}'>
+      <path d='M0 3 Q ${LW / 2} ${3 + LH * 0.64} ${LW} 3' fill='none' stroke='#f4efe6' stroke-width='1.6' stroke-linecap='round' opacity='.95'/></svg>`;
+    // ampuller: header genişliğinde tek SVG — butonların arkasına denk gelenler çizilmez, kalanlar sırayla (biri yanar biri söner) çakar
+    const BT = [0.16, 0.38, 0.63, 0.86], br = isMob ? 3.2 : 4.2, pad = br * 2 + 4;
+    const blockers = [...hm.querySelectorAll('a, button')].map(R)
+      .filter((r) => r.width > 24 && r.width < 500 && r.height > 14 && r.top - hmR.top < LH)        // görünür, ışık şeridine uzanan butonlar
+      .map((r) => [r.left - hmR.left - pad, r.right - hmR.left + pad]);
+    const HW = Math.ceil(hmR.width), bulbs = [];
+    for (let k = 0; k * LW < HW; k++) BT.forEach((t) => { const x = k * LW + t * LW;
+      if (x < HW - 4 && !blockers.some(([a, b]) => x > a && x < b)) bulbs.push([x, cy(t)]); });
+    const lightsSVG = `<svg xmlns='http://www.w3.org/2000/svg' width='${HW}' height='${LH}' viewBox='0 0 ${HW} ${LH}'>
       <defs><radialGradient id='g'><stop offset='0' stop-color='#fffbe8' stop-opacity='.95'/><stop offset='.45' stop-color='#ffe7a8' stop-opacity='.35'/><stop offset='1' stop-color='#ffd36b' stop-opacity='0'/></radialGradient>
       <radialGradient id='b' cx='.4' cy='.35'><stop offset='0' stop-color='#ffffff'/><stop offset='.7' stop-color='#f6f1e6'/><stop offset='1' stop-color='#d9d2c4'/></radialGradient></defs>
-      <style>.l{animation:tw var(--d) ease-in-out infinite;animation-delay:var(--o)}@keyframes tw{0%,100%{opacity:.25}45%{opacity:1}60%{opacity:.85}}</style>
-      <path d='M0 3 Q ${LW / 2} ${3 + LH * 0.64} ${LW} 3' fill='none' stroke='#f4efe6' stroke-width='1.6' stroke-linecap='round' opacity='.95'/>
-      ${bulbs.map(([t, d, o]) => { const x = (t * LW).toFixed(1), y = cy(t).toFixed(1), r = isMob ? 3.2 : 4.2;
-        return `<g><rect x='${x - 2}' y='${y}' width='4' height='3.5' rx='1' fill='#e9e2d4'/>
-        <circle class='l' style='--d:${d}s;--o:${o}s' cx='${x}' cy='${(+y + 4 + r).toFixed(1)}' r='${r * 2.6}' fill='url(#g)'/>
-        <circle cx='${x}' cy='${(+y + 4 + r).toFixed(1)}' r='${r}' fill='url(#b)'/></g>`; }).join('')}
+      <style>.h,.c{animation:bl 1.6s steps(1,end) infinite}.o .h,.o .c{animation-delay:-.8s}.c{animation-name:bc}
+      @keyframes bl{0%{opacity:1}50%{opacity:0}}@keyframes bc{0%{opacity:1}50%{opacity:.45}}</style>
+      ${bulbs.map(([x, y], i) => { const X = x.toFixed(1), Y = (y + 4 + br).toFixed(1);
+        return `<g class='${i % 2 ? 'o' : 'e'}'><rect x='${(x - 2).toFixed(1)}' y='${y.toFixed(1)}' width='4' height='3.5' rx='1' fill='#e9e2d4'/>
+        <circle class='h' cx='${X}' cy='${Y}' r='${(br * 2.6).toFixed(1)}' fill='url(#g)'/>
+        <circle class='c' cx='${X}' cy='${Y}' r='${br}' fill='url(#b)'/></g>`; }).join('')}
     </svg>`;
     // altın kadife yıldızlar: geniş karede düzensiz dağılmış, hafif nefes alıp döner
     const SW = isMob ? 260 : 520, SH = isMob ? 54 : 80;
@@ -97,13 +106,14 @@
     /* 6b · Header zemini: ışık zinciri + yıldızlar + logo maskesi + kadife çam köşeleri (içeriğin arkasında) */
     .hdr-main-content-bc::before { content:'' !important; position:absolute !important; inset:0 !important; z-index:-1 !important; pointer-events:none !important;
       background:
-        ${U(lightsSVG)} 0 0 / ${LW}px ${LH}px repeat-x,
+        ${U(lightsSVG)} 0 0 / ${HW}px ${LH}px no-repeat,
+        ${U(cableSVG)} 0 0 / ${LW}px ${LH}px repeat-x,
         url("${A2}xmas2-cable-clusters.webp") ${-LW / 2}px 0 / ${LW * 2}px ${Math.round(LW * 2 * 56 / 920)}px repeat-x,
         ${U(starsSVG)} ${isMob ? 40 : 260}px 0 / ${SW}px ${SH}px repeat-x,
         radial-gradient(${lmw}px ${lmh}px at ${lcx}px ${lcy}px, rgba(18,8,36,.92) 0%, rgba(18,8,36,.75) 45%, rgba(18,8,36,0) 100%),
         url("${A2}xmas2-corner-l.webp") left -6px top -4px / auto ${CH}px no-repeat,
         url("${A2}xmas2-corner-r.webp") right -6px top -4px / auto ${CH}px no-repeat !important; }`;
-    log.push(`✨ Header zemini: ışık zinciri + kablo düğümlerinde dal/top/kozalak kümeleri, (${LW}px kare) + ${stars.length} yıldız/kare + logo maskesi + köşeler (${CH}px)`);
+    log.push(`✨ Header zemini: ${bulbs.length} ampul (butonların arkasındakiler çıkarıldı, sırayla yanıp söner) + kablo düğümlerinde dal/top/kozalak kümeleri, (${LW}px kare) + ${stars.length} yıldız/kare + logo maskesi + köşeler (${CH}px)`);
   }
 
   // ── 1+2) Slider köşe süsleri — sol ve sağ üst köşeye yaslanır
@@ -335,19 +345,12 @@
     log.push('🔮 Sarkan süsler: tüm bölüm başlıkları');
   } else log.push('⚠️ .sectionTitle pseudo dolu/yok — sarkan süs atlandı');
 
-  // ── 9) Kartların üstünde kar birikintisi
-  // Kar: ortada tekrar eden doku + iki uçta doğal, yuvarlanıp köşeden sarkan kar kapağı.
-  // Doku uç kapağın dış kısmında maskeyle kesilir, kapak görseli üstüne biner (dikiş görünmez).
-  const SNOW_BG = (h, off) => `url("${MID}xmas2-snow-capl.webp") left top / auto ${h}px no-repeat, url("${MID}xmas2-snow-capr.webp") right top / auto ${h}px no-repeat, url("${MID}xmas2-snow-tile.webp") ${off}px 0 / auto ${h}px repeat-x`;  // kadife kar
-  const SNOW = (h) => {
-    const cl = Math.round(h * 24 / 32 * 10) / 10, cr = Math.round(h * 24 / 32 * 10) / 10;
-    const M = `url("${MID}xmas2-snow-maskl.webp") left top / auto 100% no-repeat, linear-gradient(#000, #000) center top / calc(100% - ${Math.round((cl + cr - 2) * 10) / 10}px) 100% no-repeat, url("${MID}xmas2-snow-maskr.webp") right top / auto 100% no-repeat`;
-    return `content: "" !important; position: absolute !important; pointer-events: none !important; z-index: 6 !important;
-      height: ${h}px !important; background: ${SNOW_BG(h, 0)} !important;
-      -webkit-mask: ${M}; mask: ${M};
-      filter: drop-shadow(0 1px 1.5px rgba(10,5,30,.35));
+  // ── 9) Kartların üstünde kadife girland (banner üstündeki kurdeleli çam kuşağının küçüğü)
+  // Tam kavis sayısına yuvarlanır (round): kartın iki ucunda yarım kavis kalmaz. Üst kenarın üzerine biner.
+  const SNOW = (h) => `content: "" !important; position: absolute !important; pointer-events: none !important; z-index: 6 !important;
+      height: ${h}px !important; background: url("${A2}xmas2-garland.webp") 0 0 / ${Math.round(h * 294 / 96)}px ${h}px round no-repeat !important;
+      -webkit-mask: none; mask: none; filter: drop-shadow(0 2px 2px rgba(10,5,30,.45));
       transform-origin: 50% 0; transition: transform .5s cubic-bezier(.34,1.8,.5,1);`;
-  };
   const snowT = [
     // [seçici, pseudo, top, yan boşluk, yükseklik, position ekle?]
     ...(isMob ? [] : [['.product-banner-container-bc.product-banner-without-titles .product-banner-info-bc', '::after', -1, 4, 16, false]]),  // mobile'da bu pseudo'lar custom.css'te dolu
@@ -366,78 +369,16 @@
   snowT.forEach(([sel, ps, top, side, h, needPos, lazy]) => {
     const all = [...document.querySelectorAll(sel)]; if (!all.length && !lazy) return;  // lazy: geç yüklenen kartlar (pseudo'su boş olduğu doğrulandı)
     if (!all.every((e) => free(e, ps))) { log.push(`⚠️ kar atlandı (pseudo dolu): ${sel}${ps}`); return; }
-    const sh = isMob ? Math.round(h * 0.85) : h;
+    const sh = Math.round((isMob ? 0.85 : 1) * h * 1.55);   // girland, kardan biraz daha yüksek
     css += `
     ${needPos ? `${sel} { position: relative !important; }` : ''}
     ${sel}${ps} { ${SNOW(sh)} top: ${top}px !important; left: ${side}px !important; right: ${side}px !important; }
-    ${sel}:nth-child(3n+2)${ps} { background: ${SNOW_BG(sh, -19)} !important; }
-    ${sel}:nth-child(3n)${ps} { background: ${SNOW_BG(sh, -38)} !important; }
-    ${sel}:hover${ps} { transform: scale(1.03, .78); }`;
+    ${sel}:hover${ps} { transform: scaleY(1.18); }`;
     snowOK.push(sel);
   });
-  log.push(`❄️ Kar birikintisi: ${snowOK.length} kart tipi → ${snowOK.join(', ')}`);
+  log.push(`🎀 Kart girlandı: ${snowOK.length} kart tipi → ${snowOK.join(', ')}`);
 
-  // ── 10) Header butonlarının üstünde kar (Bonuslar, Bonus Talep, Joker TV, Telegram, Giriş, Kayıt)
-  {
-    const hH = isMob ? 10 : 12, side = -3;   // negatif: kar butonun iki yanından hafif taşar, uçlar köşeden sarkar
-    const hcb = $('.header-custom-buttons'), hcbA = hcb && hcb.querySelector('a');
-    const hub = $('.hdr-user-bc'), signIn = $('.hdr-user-bc .sign-in'), reg = $('.hdr-user-bc .register');
-    const done = [];
-    if (hcb && hcbA && free(hcb, '::after')) {
-      const ml = parseFloat(getComputedStyle(hcbA).marginLeft) || 0;   // buton, sarmalayıcının içinde soldan boşluklu
-      css += `
-    .header-custom-buttons { position: relative !important; }
-    .header-custom-buttons::after { ${SNOW(hH)} top: -2px !important; left: ${ml + side}px !important; right: ${side}px !important; }
-    .header-custom-buttons:hover::after { transform: scale(1.04, .75); }`;
-      done.push('özel butonlar');
-    }
-    if (reg && free(reg, '::after')) {
-      css += `
-    .hdr-user-bc .register { position: relative !important; }
-    .hdr-user-bc .register::after { ${SNOW(hH)} top: -2px !important; left: ${side}px !important; right: ${side}px !important; }
-    .hdr-user-bc .register:hover::after { transform: scale(1.04, .75); }`;
-      done.push('Kayıt');
-    }
-    if (signIn && free(signIn, '::after')) {               // mobile: Giriş'in ::after'ı boş
-      css += `
-    .hdr-user-bc .sign-in { position: relative !important; }
-    .hdr-user-bc .sign-in::after { ${SNOW(hH)} top: -2px !important; left: ${side}px !important; right: ${side}px !important; }
-    .hdr-user-bc .sign-in:hover::after { transform: scale(1.04, .75); }`;
-      done.push('Giriş');
-    } else if (hub && signIn && free(hub, '::before')) {   // web: Giriş'in iki pseudo'su da dolu → kapsayıcının ::before'u ile üstüne konur
-      const hr = R(hub), sr = R(signIn);
-      const hubSel = `${cls(hub.parentElement)} > .hdr-user-bc`;
-      css += `
-    ${hubSel} { position: relative !important; }
-    ${hubSel}::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 2}px !important; right: ${Math.round(hr.right - sr.right) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }
-    ${hubSel}:has(.sign-in:hover)::before { transform: scale(1.04, .75); }`;   // sağdan konum: Kayıt sabit genişlikte, soldaki butonlar daralsa da kaymaz
-      done.push('Giriş');
-    }
-    // mobile: BONUSLAR / BONUS TALEP / JOKER TV / TELEGRAM hapları — kendi pseudo'ları dolu (ikon + yazı),
-    // tek bir kapsayıcı ::after içinde her hapa ayrı kar katmanı (sol uç + orta + sağ uç) yerleştirilir
-    const pillBox = $('.hdr-additional-info .hdr-user-bc');
-    const pills = pillBox ? [...pillBox.querySelectorAll(':scope > a.user-nav-icon')] : [];
-    if (pills.length && free(pillBox, '::after')) {
-      const ph = isMob ? 9 : 11, cl = ph * 24 / 32, cr = ph * 24 / 32, br = R(pillBox);
-      const f = (n) => Math.round(n * 10) / 10;
-      const layers = [];
-      pills.forEach((a) => {
-        const r = R(a), x = r.left - br.left - 2, w = r.width + 4;
-        layers.push(`url("${MID}xmas2-snow-capl.webp") ${f(x)}px 0 / auto ${ph}px no-repeat`);
-        layers.push(`url("${MID}xmas2-snow-capr.webp") ${f(x + w - cr)}px 0 / auto ${ph}px no-repeat`);
-        layers.push(`url("${MID}xmas2-snow-tile.webp") ${f(x + cl * 0.55)}px 0 / ${f(w - cl * 0.55 - cr * 0.55)}px ${ph}px no-repeat`);
-      });
-      const pt = Math.round(R(pills[0]).top - br.top) - 2;
-      css += `
-    .hdr-additional-info .hdr-user-bc { position: relative !important; }
-    .hdr-additional-info .hdr-user-bc::after { content: "" !important; position: absolute !important; left: 0 !important; right: 0 !important;
-      top: ${pt}px !important; height: ${ph}px !important; pointer-events: none !important; z-index: 6 !important;
-      background: ${layers.join(',\n        ')} !important;
-      filter: drop-shadow(0 1px 1px rgba(10,5,30,.35)); }`;
-      done.push(`${pills.length} hap buton`);
-    }
-    log.push(`❄️ Header buton karı: ${done.join(', ') || 'yok'}`);
-  }
+  // ── 10) Header butonlarının üstündeki kar kaldırıldı
 
   // ── Hareket azaltma
   css += `
