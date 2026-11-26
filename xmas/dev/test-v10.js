@@ -252,26 +252,26 @@
       const ml = parseFloat(getComputedStyle(hcbA).marginLeft) || 0;   // buton, sarmalayıcının içinde soldan boşluklu
       css += `
     .header-custom-buttons { position: relative !important; }
-    .header-custom-buttons::after { ${SNOW(hH)} top: 0 !important; left: ${ml + side}px !important; right: ${side}px !important; }`;
+    .header-custom-buttons::after { ${SNOW(hH)} top: -2px !important; left: ${ml + side}px !important; right: ${side}px !important; }`;
       done.push('özel butonlar');
     }
     if (reg && free(reg, '::after')) {
       css += `
     .hdr-user-bc .register { position: relative !important; }
-    .hdr-user-bc .register::after { ${SNOW(hH)} top: 0 !important; left: ${side}px !important; right: ${side}px !important; }`;
+    .hdr-user-bc .register::after { ${SNOW(hH)} top: -2px !important; left: ${side}px !important; right: ${side}px !important; }`;
       done.push('Kayıt');
     }
     if (signIn && free(signIn, '::after')) {               // mobile: Giriş'in ::after'ı boş
       css += `
     .hdr-user-bc .sign-in { position: relative !important; }
-    .hdr-user-bc .sign-in::after { ${SNOW(hH)} top: 0 !important; left: ${side}px !important; right: ${side}px !important; }`;
+    .hdr-user-bc .sign-in::after { ${SNOW(hH)} top: -2px !important; left: ${side}px !important; right: ${side}px !important; }`;
       done.push('Giriş');
     } else if (hub && signIn && free(hub, '::before')) {   // web: Giriş'in iki pseudo'su da dolu → kapsayıcının ::before'u ile üstüne konur
       const hr = R(hub), sr = R(signIn);
       const hubSel = `${cls(hub.parentElement)} > .hdr-user-bc`;
       css += `
     ${hubSel} { position: relative !important; }
-    ${hubSel}::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top)}px !important; right: ${Math.round(hr.right - sr.right) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }`;   // sağdan konum: Kayıt sabit genişlikte, soldaki butonlar daralsa da kaymaz
+    ${hubSel}::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 2}px !important; right: ${Math.round(hr.right - sr.right) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }`;   // sağdan konum: Kayıt sabit genişlikte, soldaki butonlar daralsa da kaymaz
       done.push('Giriş');
     }
     // mobile: BONUSLAR / BONUS TALEP / JOKER TV / TELEGRAM hapları — kendi pseudo'ları dolu (ikon + yazı),
@@ -288,7 +288,7 @@
         layers.push(`url("${MID}xmas-snow2-capr.webp") ${f(x + w - cr)}px 0 / auto ${ph}px no-repeat`);
         layers.push(`url("${MID}xmas-snow2-tile.webp") ${f(x + cl * 0.55)}px 0 / ${f(w - cl * 0.55 - cr * 0.55)}px ${ph}px no-repeat`);
       });
-      const pt = Math.round(R(pills[0]).top - br.top);
+      const pt = Math.round(R(pills[0]).top - br.top) - 2;
       css += `
     .hdr-additional-info .hdr-user-bc { position: relative !important; }
     .hdr-additional-info .hdr-user-bc::after { content: "" !important; position: absolute !important; left: 0 !important; right: 0 !important;
