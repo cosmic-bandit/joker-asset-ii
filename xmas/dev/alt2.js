@@ -107,7 +107,7 @@
       { host: '.hm-row-bc.has-slider .slider-bc > :first-child::after', pct: 52.5, len: 80, o: 'gift', w: 64, h: 60, sw: 'x2SwingA 3.9s', d: -2.2 },
     ];
     const okFree = (sel) => { const [base, ps] = sel.split('::'); const el = $(base); return el && free(el, '::' + ps); };
-    const ORN = (r, w, h, len) => `background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope-tile.webp") center top / ${f1(7 * k)}px auto repeat-y !important;
+    const ORN = (r, w, h, len) => `background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope-tile.webp") center top / ${f1(4.5 * k)}px auto repeat-y !important;
       filter: drop-shadow(0 4px 5px rgba(0,0,0,.45)); transform-origin: 50% 0 !important;
       width:${f1(w)}px !important; height:${f1(len + h)}px !important;
       animation: ${r.sw} ease-in-out ${r.d}s infinite alternate !important;`;
@@ -125,7 +125,7 @@
       const km = isMob ? 0.6 : 1, w = r.w * km, h = r.h * km, len = r.len * km;
       css += `
     ${r.host} { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:15 !important;
-      top:0 !important; left:calc(${r.pct}% - ${f1(w / 2)}px) !important; ${ORN(r, w, h, len).replace(`${f1(7 * k)}px auto`, `${f1(7 * km)}px auto`)} }`;
+      top:0 !important; left:calc(${r.pct}% - ${f1(w / 2)}px) !important; ${ORN(r, w, h, len).replace(`${f1(4.5 * k)}px auto`, `${f1(4.5 * km)}px auto`)} }`;
       hostsOK.push(`orta:${r.o}`);
     });
     log.push(`🪢 Örgü ipten sarkan süsler: ${hostsOK.join(', ')}`);
