@@ -153,7 +153,9 @@
     ];
     const okFree = (sel) => { const [base, ps] = sel.split('::'); const el = $(base); return el && free(el, '::' + ps); };
     // ip, süsün kapağına 4 px girip orada biter (alttan görünmez): uzun ip görselinin ALT ucu süsün tepesine hizalanır
-    const ORN = (r, w, h, len, kk = k) => { const rw = 4.5 * kk, rl = 1095 * rw / 16, y = len + 4 * kk - rl;
+    // süs görsellerinin oranı (yükseklik/genişlik) — halat süsün üst 1/3'üne kadar iner
+    const ORN_AR = { ball: 72 / 79, disco2: 68 / 75, star: 64 / 72, bells: 80 / 86, gift: 72 / 78, sock: 80 / 65 };
+    const ORN = (r, w, h, len, kk = k) => { const rw = 4.5 * kk, rl = 1095 * rw / 16, dh = w * ORN_AR[r.o], y = (len + h - dh) + dh / 3 - rl;
       return `background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope-long.webp") center ${f1(y)}px / ${f1(rw)}px auto no-repeat !important;
       filter: drop-shadow(0 4px 5px rgba(0,0,0,.45)); transform-origin: 50% 0 !important;
       width:${f1(w)}px !important; height:${f1(len + h)}px !important;
