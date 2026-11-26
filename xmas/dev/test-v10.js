@@ -193,21 +193,21 @@
       filter: drop-shadow(0 1px 1.5px rgba(10,5,30,.35));`;
   const snowT = [
     // [seçici, pseudo, top, yan boşluk, yükseklik, position ekle?]
-    ['.product-banner-info-bc', '::after', -4, 10, 16, false],
+    ['.product-banner-container-bc.product-banner-without-titles .product-banner-info-bc', '::after', -4, 10, 16, false],
     ['.featuredGamesVersion1 .swiper-slide', '::after', 0, 3, 14, false],
     ['.expressWidget', '::after', -4, 8, 16, false],
     ['.bbAiRecBetsItem', '::after', 0, 4, 15, false],
     ['.casino-big-win-replays-card', '::before', -4, 10, 15, false],
-    ['.tournamentsWidget .swiper-slide', '::after', 0, 6, 15, false],
-    ['.casinoGameItemContent', '::after', 0, 0, 13, false],
+    ['.tournamentsWidget .swiper-slide', '::after', 0, 6, 15, false, true],
+    ['.casinoGameItemContent', '::after', 0, 0, 13, false, true],
     ['.casinoRandomGameWidget', '::after', -4, 14, 16, true],
     ['.jackpot-pools-widget .swiper-slide', '::after', 0, 6, 14, false],
     ['.casino-live-wins-container', '::after', -4, 10, 16, true],
   ];
   const snowOK = [];
-  snowT.forEach(([sel, ps, top, side, h, needPos]) => {
-    const el = $(sel); if (!el) return;
-    if (!free(el, ps)) { log.push(`⚠️ kar atlandı (pseudo dolu): ${sel}${ps}`); return; }
+  snowT.forEach(([sel, ps, top, side, h, needPos, lazy]) => {
+    const all = [...document.querySelectorAll(sel)]; if (!all.length && !lazy) return;  // lazy: geç yüklenen kartlar (pseudo'su boş olduğu doğrulandı)
+    if (!all.every((e) => free(e, ps))) { log.push(`⚠️ kar atlandı (pseudo dolu): ${sel}${ps}`); return; }
     const sh = isMob ? Math.round(h * 0.85) : h;
     css += `
     ${needPos ? `${sel} { position: relative !important; }` : ''}
