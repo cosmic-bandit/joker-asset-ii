@@ -265,7 +265,7 @@
       const hr = R(hub), sr = R(signIn);
       css += `
     .hdr-user-bc { position: relative !important; }
-    .hdr-user-bc::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 1}px !important; left: ${Math.round(sr.left - hr.left) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }`;
+    .hdr-user-bc::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 1}px !important; right: ${Math.round(hr.right - sr.right) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }`;   // sağdan konum: Kayıt sabit genişlikte, soldaki butonlar daralsa da kaymaz
       done.push('Giriş');
     }
     log.push(`❄️ Header buton karı: ${done.join(', ') || 'yok'}`);
