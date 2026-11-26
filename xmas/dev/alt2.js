@@ -72,7 +72,8 @@
       <path d='M0 3 Q ${LW / 2} ${3 + LH * 0.64} ${LW} 3' fill='none' stroke='#f4efe6' stroke-width='1.6' stroke-linecap='round' opacity='.95'/></svg>`;
     // ampuller: header genişliğinde tek SVG — butonların arkasına denk gelenler çizilmez, kalanlar sırayla (biri yanar biri söner) çakar
     const BT = [0.16, 0.38, 0.63, 0.86], br = isMob ? 3.2 : 4.2, pad = br * 2 + 4;
-    const blockers = [...hm.querySelectorAll('a, button')].map(R)
+    const blockers = [...hm.querySelectorAll('a, button')].filter((e) => !e.closest('.logo, .logo-container') && !e.querySelector('.hdr-logo-bc')).map(R)   // logo buton sayılmaz (arkası maskeli)
+     
       .filter((r) => r.width > 24 && r.width < 500 && r.height > 14 && r.top - hmR.top < LH)        // görünür, ışık şeridine uzanan butonlar
       .map((r) => [r.left - hmR.left - pad, r.right - hmR.left + pad]);
     const HW = Math.ceil(hmR.width), bulbs = [];
