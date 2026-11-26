@@ -164,12 +164,12 @@
   // ── 8) Bölüm başlığı satırına sarkan süsler (altın küre + mor kristal, ince altın iple)
   const st0 = $('.sectionTitle');
   if (st0 && free(st0, '::before') && free(st0, '::after')) {
-    const k = isMob ? 0.8 : 1;
-    const g = { w: Math.round(23.5 * k), h: Math.round(30 * k), t: Math.round(28 * k) };   // altın küre
-    const v = { w: Math.round(10 * k), h: Math.round(40 * k), t: Math.round(18 * k) };     // mor kristal
-    const up = isMob ? -22 : -30;
+    const k = isMob ? 0.75 : 1;
+    const g = { w: Math.round(31 * k), h: Math.round(40 * k), t: Math.round(24 * k) };   // altın küre
+    const v = { w: Math.round(13.5 * k), h: Math.round(55 * k), t: Math.round(12 * k) };     // mor kristal
+    const up = isMob ? -20 : -28;
     const ROPE = (t) => `linear-gradient(rgba(236,198,118,.9), rgba(236,198,118,.9)) center top / 1px ${t}px no-repeat`;
-    const P = isMob ? ['58%', '66%', '70%', '78%', '50%', '59%'] : ['46%', 'calc(46% + 30px)', '57%', 'calc(57% + 26px)', '38%', 'calc(38% + 34px)'];
+    const P = isMob ? ['58%', '66%', '70%', '78%', '50%', '59%'] : ['46%', 'calc(46% + 44px)', '57%', 'calc(57% + 40px)', '38%', 'calc(38% + 48px)'];
     css += `
     .sectionTitle { position: relative !important; }
     .sectionTitle::before, .sectionTitle::after { content: "" !important; position: absolute !important; top: ${up}px !important;
