@@ -213,7 +213,7 @@
     ['.expressWidget', '::after', -4, 8, 16, false, true],
     ['.bbAiRecBetsItem', '::after', 0, 4, 15, false, true],
     ['.casino-big-win-replays-card', '::before', -4, 10, 15, false, true],
-    isMob ? ['.tournamentsWidgetItem', '::after', -4, 10, 15, true, true]        // mobile: swiper yok, kart doğrudan
+    isMob ? ['.tournamentsWidgetItem', '::after', 0, 6, 15, true, true]        // mobile: swiper yok, kart doğrudan
           : ['.tournamentsWidget .swiper-slide', '::after', 0, 6, 15, false, true],
     ['.casinoGameItemContent', '::after', 0, 0, 13, false, true],
     ['.casinoRandomGameWidget', '::after', -4, 14, 16, true],
