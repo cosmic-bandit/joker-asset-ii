@@ -87,45 +87,48 @@
     // Kaydırmaya bağlı animasyonu desteklemeyen tarayıcıda sabit 20 kalır (slider'ın kendi öğelerinin üstünde).
     log.push(`🌲 Köşe süsleri: ${cw}px genişlik`);
 
-    // ── 2b) Köşe süslerinin altından geçen örgü ip kuşağı (üst kenardan sol kenara sarkar) + kuşaktan sarkan süsler
-    //       Kroki: ip, dalın ucundan çıkıp köşeye doğru sarkarak sol kenardaki dalın altına girer;
-    //       ortasından kısa iple yıldız, sol ucuna yakın uzun iple yılbaşı topu sarkar. Sağ köşe aynalı.
+    // ── 2b) Örgü iplerden sarkan kadife süsler — her köşede 2 ip (kısa: yatay daldan, uzun: dikey dalın ucundan) + ortada 2 ip (girlandın altından)
     const k = cw / 300;
     const f1 = (n) => Math.round(n * 10) / 10;
-    const HANG = {   // köşe kutusu koordinatları (300 px genişlik referansı); x,y = ipteki asılma noktası
-      L: [{ x: 193, y: 122, len: 24, o: 'star', w: 42, h: 37, sw: 'x2SwingA 3.2s' }, { x: 81, y: 177, len: 78, o: 'ball', w: 46, h: 42, sw: 'x2SwingC 4.1s' }],
-      R: [{ x: 193, y: 122, len: 22, o: 'bells', w: 52, h: 48, sw: 'x2SwingB 3.6s' }, { x: 81, y: 177, len: 74, o: 'disco2', w: 44, h: 40, sw: 'x2SwingA 4.4s' }],
-    };
     css += `
-    @keyframes x2SwingA { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
-    @keyframes x2SwingB { from { transform: rotate(6deg); } to { transform: rotate(-6deg); } }
-    @keyframes x2SwingC { from { transform: rotate(-6deg); } to { transform: rotate(5deg); } }`;
-    const hostsOK = [];
-    [['L', 'before', 'left', 'l'], ['R', 'after', 'right', 'r']].forEach(([key, ps, edge, lr]) => {
-      const swagSel = `.hm-row-bc.has-slider .slider-bc > :first-child::${ps}`;
-      const hosts = [`.hm-row-bc.has-slider .slider-bc::${ps}`, `.hm-row-bc.has-slider > .hm-row-bc-inner::${ps}`];
-      const okFree = (sel) => { const el = $(sel.split('::')[0]); return el && free(el, '::' + ps); };
-      if (okFree(swagSel)) {
-        css += `
-    ${swagSel} { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:14 !important;
-      top:${off.t}px !important; ${edge}:${off.s}px !important; width:${f1(300 * k)}px !important; height:${f1(230 * k)}px !important;
-      background: url("${A2}xmas2-swag-${lr}.webp") 0 0 / 100% 100% no-repeat !important; filter: drop-shadow(0 5px 6px rgba(0,0,0,.45)); }`;
-        hostsOK.push(`${key}:kuşak`);
-      } else log.push(`⚠️ kuşak atlandı: ${swagSel}`);
-      HANG[key].forEach((r, i) => {
-        const sel = hosts[i];
-        if (!okFree(sel)) { log.push(`⚠️ süs atlandı: ${sel}`); return; }
-        const w = r.w * k, h = r.h * k, len = r.len * k;
-        css += `
-    ${sel} { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:15 !important;
-      top:${f1(off.t + (r.y - 3) * k)}px !important; ${edge}:${f1(off.s + r.x * k - w / 2)}px !important; width:${f1(w)}px !important; height:${f1(len + h)}px !important;
-      background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope.webp") center top / ${f1(6 * k)}px auto no-repeat !important;
+    @keyframes x2SwingA { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+    @keyframes x2SwingB { from { transform: rotate(5deg); } to { transform: rotate(-5deg); } }
+    @keyframes x2SwingC { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }`;
+    // köşe ipleri: köşe kutusu koordinatları (300 px referans); x = ipin merkezi, y = ipin üst ucu (dalın arkasında)
+    const CORNER = {
+      L: [{ host: '.hm-row-bc.has-slider .slider-bc::before', x: 156, y: 40, len: 92, o: 'star', w: 50, h: 44, sw: 'x2SwingA 3.3s', d: -0.4 },
+          { host: '.hm-row-bc.has-slider > .hm-row-bc-inner::before', x: 47, y: 180, len: 190, o: 'ball', w: 52, h: 48, sw: 'x2SwingC 4.6s', d: -1.9 }],
+      R: [{ host: '.hm-row-bc.has-slider .slider-bc::after', x: 156, y: 40, len: 84, o: 'sock', w: 46, h: 57, sw: 'x2SwingB 3.7s', d: -1.2 },
+          { host: '.hm-row-bc.has-slider > .hm-row-bc-inner::after', x: 47, y: 180, len: 176, o: 'disco2', w: 50, h: 45, sw: 'x2SwingC 4.9s', d: -3.1 }],
+    };
+    // orta ipler: slider'ın üst kenarından (girlandın arkasından) iner; konum slider genişliğinin yüzdesi
+    const MID_R = [
+      { host: '.hm-row-bc.has-slider .slider-bc > :first-child::before', pct: 44, len: 74, o: 'bells', w: 60, h: 56, sw: 'x2SwingB 3.4s', d: -0.8 },
+      { host: '.hm-row-bc.has-slider .slider-bc > :first-child::after', pct: 52.5, len: 80, o: 'gift', w: 64, h: 60, sw: 'x2SwingA 3.9s', d: -2.2 },
+    ];
+    const okFree = (sel) => { const [base, ps] = sel.split('::'); const el = $(base); return el && free(el, '::' + ps); };
+    const ORN = (r, w, h, len) => `background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope.webp") center top / ${f1(7 * k)}px auto no-repeat !important;
       filter: drop-shadow(0 4px 5px rgba(0,0,0,.45)); transform-origin: 50% 0 !important;
-      animation: ${r.sw} ease-in-out ${key === 'R' ? -1.1 : -0.4 * i}s infinite alternate !important; }`;
-        hostsOK.push(`${key}:${r.o}`);
-      });
+      width:${f1(w)}px !important; height:${f1(len + h)}px !important;
+      animation: ${r.sw} ease-in-out ${r.d}s infinite alternate !important;`;
+    const hostsOK = [];
+    [['L', 'left'], ['R', 'right']].forEach(([key, edge]) => CORNER[key].forEach((r) => {
+      if (!okFree(r.host)) { log.push(`⚠️ ip atlandı: ${r.host}`); return; }
+      const w = r.w * k, h = r.h * k, len = r.len * k;
+      css += `
+    ${r.host} { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:15 !important;
+      top:${f1(off.t + r.y * k)}px !important; ${edge}:${f1(off.s + r.x * k - w / 2)}px !important; ${ORN(r, w, h, len)} }`;
+      hostsOK.push(`${key}:${r.o}`);
+    }));
+    MID_R.forEach((r) => {
+      if (!okFree(r.host)) { log.push(`⚠️ orta ip atlandı: ${r.host}`); return; }
+      const km = isMob ? 0.6 : 1, w = r.w * km, h = r.h * km, len = r.len * km;
+      css += `
+    ${r.host} { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:15 !important;
+      top:0 !important; left:calc(${r.pct}% - ${f1(w / 2)}px) !important; ${ORN(r, w, h, len).replace(`${f1(7 * k)}px auto`, `${f1(7 * km)}px auto`)} }`;
+      hostsOK.push(`orta:${r.o}`);
     });
-    log.push(`🪢 Örgü ip kuşağı + sarkan süsler: ${hostsOK.join(', ')}`);
+    log.push(`🪢 Örgü ipten sarkan süsler: ${hostsOK.join(', ')}`);
   }
 
   // ── 4) Web header "2027" sahnesi — boşluğa göre ortalanır, yer yoksa kendini gizler
