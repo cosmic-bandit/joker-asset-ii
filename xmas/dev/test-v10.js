@@ -203,29 +203,29 @@
   } else log.push('⚠️ .sectionTitle pseudo dolu/yok — sarkan süs atlandı');
 
   // ── 9) Kartların üstünde kar birikintisi
-  // Kar uçları: sabit 40px'lik yumuşak, incelerek eriyen maske kapakları (kart genişliğinden bağımsız)
+  // Kar uçları: sabit 56px'lik yumuşak, incelerek eriyen maske kapakları (kart genişliğinden bağımsız)
   const capSVG = (flip) => 'data:image/svg+xml,' + encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 16' preserveAspectRatio='none'><defs><filter id='b' x='-50%' y='-50%' width='200%' height='200%'><feGaussianBlur stdDeviation='2.4 1.6'/></filter></defs>` +
-    `<g ${flip ? "transform='translate(40 0) scale(-1 1)'" : ''}><path filter='url(#b)' fill='#fff' d='M60,-8 L20,-8 C11,-8 6,0 2,6 L2,8 C7,11 13,24 26,24 L60,24 Z'/></g></svg>`);
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 16' preserveAspectRatio='none'><defs><filter id='b' x='-50%' y='-50%' width='200%' height='200%'><feGaussianBlur stdDeviation='3.4 1.6'/></filter></defs>` +
+    `<g ${flip ? "transform='translate(56 0) scale(-1 1)'" : ''}><path filter='url(#b)' fill='#fff' d='M84,-8 L28,-8 C15,-8 8,0 3,6 L3,8 C10,11 18,24 36,24 L84,24 Z'/></g></svg>`);
   const CAPL = capSVG(false), CAPR = capSVG(true);
-  const SNOWMASK = `url("${CAPL}") left top / 40px 100% no-repeat, linear-gradient(#000, #000) center top / calc(100% - 78px) 100% no-repeat, url("${CAPR}") right top / 40px 100% no-repeat`;
+  const SNOWMASK = `url("${CAPL}") left top / 56px 100% no-repeat, linear-gradient(#000, #000) center top / calc(100% - 110px) 100% no-repeat, url("${CAPR}") right top / 56px 100% no-repeat`;
   const SNOW = (h) => `content: "" !important; position: absolute !important; pointer-events: none !important; z-index: 6 !important;
       height: ${h}px !important; background: url("${MID}xmas-snowcap.webp") 0 0 / auto ${h}px repeat-x !important;
       -webkit-mask: ${SNOWMASK}; mask: ${SNOWMASK};
       filter: drop-shadow(0 1px 1.5px rgba(10,5,30,.35));`;
   const snowT = [
     // [seçici, pseudo, top, yan boşluk, yükseklik, position ekle?]
-    ...(isMob ? [] : [['.product-banner-container-bc.product-banner-without-titles .product-banner-info-bc', '::after', -4, 10, 16, false]]),  // mobile'da bu pseudo'lar custom.css'te dolu
+    ...(isMob ? [] : [['.product-banner-container-bc.product-banner-without-titles .product-banner-info-bc', '::after', -1, 10, 16, false]]),  // mobile'da bu pseudo'lar custom.css'te dolu
     ['.featuredGamesVersion1 .swiper-slide', '::after', 0, 3, 14, false],
-    ['.expressWidget', '::after', -4, 8, 16, false, true],
+    ['.expressWidget', '::after', -1, 8, 16, false, true],
     ['.bbAiRecBetsItem', '::after', 0, 4, 15, false, true],
-    ['.casino-big-win-replays-card', '::before', -4, 10, 15, false, true],
+    ['.casino-big-win-replays-card', '::before', -1, 10, 15, false, true],
     isMob ? ['.tournamentsWidgetItem', '::after', 0, 6, 15, true, true]        // mobile: swiper yok, kart doğrudan
           : ['.tournamentsWidget .swiper-slide', '::after', 0, 6, 15, false, true],
     ['.casinoGameItemContent', '::after', 0, 0, 13, false, true],
-    ['.casinoRandomGameWidget', '::after', -4, 14, 16, true, true],
+    ['.casinoRandomGameWidget', '::after', -1, 14, 16, true, true],
     ['.jackpot-pools-widget .swiper-slide', '::after', 0, 6, 14, false],
-    ['.casino-live-wins', '::after', -4, 10, 16, true, true],
+    ['.casino-live-wins', '::after', -1, 10, 16, true, true],
   ];
   const snowOK = [];
   snowT.forEach(([sel, ps, top, side, h, needPos, lazy]) => {
