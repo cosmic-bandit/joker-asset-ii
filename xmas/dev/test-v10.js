@@ -163,7 +163,22 @@
 
   // ── 8) Bölüm başlığı satırına sarkan süsler (altın küre + mor kristal, ince altın iple)
   const st0 = $('.sectionTitle');
-  if (st0 && free(st0, '::before') && free(st0, '::after')) {
+  const stt = $('.sectionTitleText');
+  if (isMob && stt && free(stt, '::after')) {
+    // Mobile: başlık satırı dar — süs çifti başlık metninin hemen arkasına, satır içinde sarkar
+    const ROPE = 'rgba(236,198,118,.9)';
+    css += `
+    .sectionTitleText::after { content: "" !important; display: inline-block !important; vertical-align: top !important;
+      width: 44px !important; height: 51px !important; margin: -26px 0 -26px 12px !important; pointer-events: none !important;
+      background:
+        url("${MID}xmas-orn2-gold.webp") 0 18px / 23px 30px no-repeat,
+        linear-gradient(${ROPE}, ${ROPE}) 11px 0 / 1px 19px no-repeat,
+        url("${MID}xmas-orn2-violet.webp") 32px 10px / 10px 41px no-repeat,
+        linear-gradient(${ROPE}, ${ROPE}) 37px 0 / 1px 11px no-repeat !important;
+      filter: drop-shadow(0 3px 4px rgba(0,0,0,.45)); transform-origin: 50% 0; animation: xmasHang 4.6s ease-in-out infinite; }
+    .hm-row-bc:nth-child(even) .sectionTitleText::after { animation-delay: -2.1s; }`;
+    log.push('🔮 Sarkan süsler (mobile): başlık metninin arkasında');
+  } else if (!isMob && st0 && free(st0, '::before') && free(st0, '::after')) {
     const k = isMob ? 0.75 : 1;
     const g = { w: Math.round(31 * k), h: Math.round(40 * k), t: Math.round(24 * k) };   // altın küre
     const v = { w: Math.round(13.5 * k), h: Math.round(55 * k), t: Math.round(12 * k) };     // mor kristal
@@ -223,7 +238,7 @@
     @media (prefers-reduced-motion: reduce) {
       .logo::before, .logo::after, .header-bc::before, .header-bc::after, .hdr-main-content-bc::before, .hdr-main-content-bc::after,
       .layout-header-holder-bc::before, .layout-header-holder-bc::after, .logo-container::before, .logo-container::after,
-      .layout-content-holder-bc *::before, .layout-content-holder-bc *::after, .sectionTitle::before, .sectionTitle::after, .sectionTitleText::before { animation: none !important; }
+      .layout-content-holder-bc *::before, .layout-content-holder-bc *::after, .sectionTitle::before, .sectionTitle::after, .sectionTitleText::before, .sectionTitleText::after { animation: none !important; }
     }`;
 
   const st = document.createElement('style');
