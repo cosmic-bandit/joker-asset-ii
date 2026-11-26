@@ -242,6 +242,35 @@
   });
   log.push(`❄️ Kar birikintisi: ${snowOK.length} kart tipi → ${snowOK.join(', ')}`);
 
+  // ── 10) Header butonlarının üstünde kar (Bonuslar, Bonus Talep, Joker TV, Telegram, Giriş, Kayıt)
+  {
+    const hH = isMob ? 10 : 12, side = 2;
+    const hcb = $('.header-custom-buttons'), hcbA = hcb && hcb.querySelector('a');
+    const hub = $('.hdr-user-bc'), signIn = $('.hdr-user-bc .sign-in'), reg = $('.hdr-user-bc .register');
+    const done = [];
+    if (hcb && hcbA && free(hcb, '::after')) {
+      const ml = parseFloat(getComputedStyle(hcbA).marginLeft) || 0;   // buton, sarmalayıcının içinde soldan boşluklu
+      css += `
+    .header-custom-buttons { position: relative !important; }
+    .header-custom-buttons::after { ${SNOW(hH)} top: -1px !important; left: ${ml + side}px !important; right: ${side}px !important; }`;
+      done.push('özel butonlar');
+    }
+    if (reg && free(reg, '::after')) {
+      css += `
+    .hdr-user-bc .register { position: relative !important; }
+    .hdr-user-bc .register::after { ${SNOW(hH)} top: -1px !important; left: ${side}px !important; right: ${side}px !important; }`;
+      done.push('Kayıt');
+    }
+    if (hub && signIn && free(hub, '::before')) {   // Giriş'in iki pseudo'su da dolu → kapsayıcının ::before'u ile üstüne konur
+      const hr = R(hub), sr = R(signIn);
+      css += `
+    .hdr-user-bc { position: relative !important; }
+    .hdr-user-bc::before { ${SNOW(hH)} top: ${Math.round(sr.top - hr.top) - 1}px !important; left: ${Math.round(sr.left - hr.left) + side}px !important; width: ${Math.round(sr.width) - 2 * side}px !important; }`;
+      done.push('Giriş');
+    }
+    log.push(`❄️ Header buton karı: ${done.join(', ') || 'yok'}`);
+  }
+
   // ── Hareket azaltma
   css += `
     @media (prefers-reduced-motion: reduce) {
