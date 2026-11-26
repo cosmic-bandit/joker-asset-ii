@@ -216,9 +216,9 @@
     isMob ? ['.tournamentsWidgetItem', '::after', 0, 6, 15, true, true]        // mobile: swiper yok, kart doğrudan
           : ['.tournamentsWidget .swiper-slide', '::after', 0, 6, 15, false, true],
     ['.casinoGameItemContent', '::after', 0, 0, 13, false, true],
-    ['.casinoRandomGameWidget', '::after', -4, 14, 16, true],
+    ['.casinoRandomGameWidget', '::after', -4, 14, 16, true, true],
     ['.jackpot-pools-widget .swiper-slide', '::after', 0, 6, 14, false],
-    ['.casino-live-wins-container', '::after', -4, 10, 16, true],
+    ['.casino-live-wins-container', '::after', -4, 10, 16, true, true],
   ];
   const snowOK = [];
   snowT.forEach(([sel, ps, top, side, h, needPos, lazy]) => {
