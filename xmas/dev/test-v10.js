@@ -169,7 +169,7 @@
     const ROPE = 'rgba(236,198,118,.9)';
     css += `
     .sectionTitleText::after { content: "" !important; display: inline-block !important; vertical-align: top !important;
-      width: 44px !important; height: 51px !important; margin: -26px 0 -26px 12px !important; pointer-events: none !important;
+      width: 44px !important; height: 51px !important; margin: -33px 0 -33px 12px !important; pointer-events: none !important;
       background:
         url("${MID}xmas-orn2-gold.webp") 0 18px / 23px 30px no-repeat,
         linear-gradient(${ROPE}, ${ROPE}) 11px 0 / 1px 19px no-repeat,
