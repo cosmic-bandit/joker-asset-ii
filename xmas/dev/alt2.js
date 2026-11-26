@@ -2,7 +2,7 @@
 (() => {
   ['xmas-test-v1', 'xmas-test-v2', 'xmas-test-v3', 'xmas-test-v4', 'xmas-test-v5', 'xmas-test-v6', 'xmas-test-v7', 'xmas-test-v8', 'xmas-test-v9', 'xmas-test-v10', 'xmas-alt2'].forEach((id) => document.getElementById(id)?.remove());
   const CDN = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@594d5d488257/xmas/';
-  const A2 = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@2105f7de8477/xmas/alt2/';   // alternatif 2 assetleri
+  const A2 = 'https://cdn.jsdelivr.net/gh/cosmic-bandit/joker-asset-ii@e78881c61734/xmas/alt2/';   // alternatif 2 assetleri
   const isMob = /is-mobile/.test(document.documentElement.className + ' ' + document.body.className);
   const $ = (s) => document.querySelector(s);
   const cls = (el) => '.' + [...el.classList].join('.');
@@ -107,10 +107,12 @@
       { host: '.hm-row-bc.has-slider .slider-bc > :first-child::after', pct: 52.5, len: 80, o: 'gift', w: 64, h: 60, sw: 'x2SwingA 3.9s', d: -2.2 },
     ];
     const okFree = (sel) => { const [base, ps] = sel.split('::'); const el = $(base); return el && free(el, '::' + ps); };
-    const ORN = (r, w, h, len) => `background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope-tile.webp") center top / ${f1(4.5 * k)}px auto repeat-y !important;
+    // ip, süsün kapağına 4 px girip orada biter (alttan görünmez): uzun ip görselinin ALT ucu süsün tepesine hizalanır
+    const ORN = (r, w, h, len, kk = k) => { const rw = 4.5 * kk, rl = 1095 * rw / 16, y = len + 4 * kk - rl;
+      return `background: url("${A2}xmas2-orn-${r.o}.webp") center bottom / ${f1(w)}px auto no-repeat, url("${A2}xmas2-rope-long.webp") center ${f1(y)}px / ${f1(rw)}px auto no-repeat !important;
       filter: drop-shadow(0 4px 5px rgba(0,0,0,.45)); transform-origin: 50% 0 !important;
       width:${f1(w)}px !important; height:${f1(len + h)}px !important;
-      animation: ${r.sw} ease-in-out ${r.d}s infinite alternate !important;`;
+      animation: ${r.sw} ease-in-out ${r.d}s infinite alternate !important;`; };
     const hostsOK = [];
     [['L', 'left'], ['R', 'right']].forEach(([key, edge]) => CORNER[key].forEach((r) => {
       if (!okFree(r.host)) { log.push(`⚠️ ip atlandı: ${r.host}`); return; }
@@ -125,7 +127,7 @@
       const km = isMob ? 0.6 : 1, w = r.w * km, h = r.h * km, len = r.len * km;
       css += `
     ${r.host} { content:'' !important; position:absolute !important; pointer-events:none !important; z-index:15 !important;
-      top:0 !important; left:calc(${r.pct}% - ${f1(w / 2)}px) !important; ${ORN(r, w, h, len).replace(`${f1(4.5 * k)}px auto`, `${f1(4.5 * km)}px auto`)} }`;
+      top:0 !important; left:calc(${r.pct}% - ${f1(w / 2)}px) !important; ${ORN(r, w, h, len, km)} }`;
       hostsOK.push(`orta:${r.o}`);
     });
     log.push(`🪢 Örgü ipten sarkan süsler: ${hostsOK.join(', ')}`);
