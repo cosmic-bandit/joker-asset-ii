@@ -165,17 +165,17 @@
   const st0 = $('.sectionTitle');
   const stt = $('.sectionTitleText');
   if (isMob && stt && free(stt, '::after')) {
-    // Mobile: başlık satırı dar — süs çifti başlık metninin hemen arkasına, satır içinde sarkar
+    // Mobile: bölümler arası boşluk çok dar — süs çifti başlık metninin arkasında, satır yüksekliği içinde
     const ROPE = 'rgba(236,198,118,.9)';
     css += `
-    .sectionTitleText::after { content: "" !important; display: inline-block !important; vertical-align: top !important;
-      width: 44px !important; height: 51px !important; margin: -33px 0 -33px 12px !important; pointer-events: none !important;
+    .sectionTitleText::after { content: "" !important; display: inline-block !important; vertical-align: middle !important;
+      width: 34px !important; height: 30px !important; margin: -8px 0 -8px 10px !important; pointer-events: none !important;
       background:
-        url("${MID}xmas-orn2-gold.webp") 0 18px / 23px 30px no-repeat,
-        linear-gradient(${ROPE}, ${ROPE}) 11px 0 / 1px 19px no-repeat,
-        url("${MID}xmas-orn2-violet.webp") 32px 10px / 10px 41px no-repeat,
-        linear-gradient(${ROPE}, ${ROPE}) 37px 0 / 1px 11px no-repeat !important;
-      filter: drop-shadow(0 3px 4px rgba(0,0,0,.45)); transform-origin: 50% 0; animation: xmasHang 4.6s ease-in-out infinite; }
+        url("${MID}xmas-orn2-gold.webp") 0 8px / 17px 22px no-repeat,
+        linear-gradient(${ROPE}, ${ROPE}) 8px 0 / 1px 9px no-repeat,
+        url("${MID}xmas-orn2-violet.webp") 24px 2px / 7px 28px no-repeat,
+        linear-gradient(${ROPE}, ${ROPE}) 27px 0 / 1px 3px no-repeat !important;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.45)); transform-origin: 50% 0; animation: xmasHang 4.6s ease-in-out infinite; }
     .hm-row-bc:nth-child(even) .sectionTitleText::after { animation-delay: -2.1s; }`;
     log.push('🔮 Sarkan süsler (mobile): başlık metninin arkasında');
   } else if (!isMob && st0 && free(st0, '::before') && free(st0, '::after')) {
