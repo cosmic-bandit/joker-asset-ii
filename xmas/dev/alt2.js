@@ -72,7 +72,7 @@
   css += `
     /* 6 · Kadife girland (kurdeleli çam kuşağı) + birleşim yerlerinde alttan aydınlanan Jester şapkaları — 6 sn'de bir lastik gibi esneyip yerine oturur */
     .header-bc::after { content:'' !important; position:absolute !important; left:0 !important; right:0 !important; bottom:-${GH - 6}px !important; height:${TH}px !important;
-      pointer-events:none !important; z-index:1 !important;
+      pointer-events:none !important; z-index:4 !important;   /* header içeriğinin (z 2/3) üstünde: şapkalar header'a taşar */
       background: ${UH} 0 0 / ${TW}px ${TH}px repeat-x, url("${A2}xmas2-garland.webp") 0 ${HT}px / ${GW}px ${GH}px repeat-x !important; filter: drop-shadow(0 3px 4px rgba(0,0,0,.5));
       transform-origin: 50% ${HT}px; animation: x2Bungee 6s cubic-bezier(.3,.7,.4,1) 1s infinite !important; }`;
   log.push(`💡 Header alt kenarı (hdr-main-content'e göre): ${hdrBottomInHm}px`);
