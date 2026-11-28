@@ -65,9 +65,9 @@
   const bw = HWd * 0.6, bx = (x) => (x - bw / 2).toFixed(1);   // kürk band genişliği (şapkanın ~%60'ı)
   const hatSVG = `<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='${TW}' height='${TH}' viewBox='0 0 ${TW} ${TH}'>
     <defs>
-      <filter id='h' x='-50%' y='-50%' width='200%' height='200%'><feGaussianBlur in='SourceAlpha' stdDeviation='${(HHt * 0.07).toFixed(2)}'/>
-        <feComponentTransfer><feFuncA type='linear' slope='1.4'/></feComponentTransfer>
-        <feFlood flood-color='#ffd98a'/><feComposite operator='in' in2='SourceGraphic'/></filter>
+      <filter id='h' x='-50%' y='-50%' width='200%' height='200%'><feGaussianBlur in='SourceAlpha' stdDeviation='${(HHt * 0.07).toFixed(2)}' result='bl'/>
+        <feComponentTransfer in='bl' result='al'><feFuncA type='linear' slope='1.4'/></feComponentTransfer>
+        <feFlood flood-color='#ffd98a' result='fl'/><feComposite in='fl' in2='al' operator='in'/></filter>
       <filter id='d' x='-30%' y='-300%' width='160%' height='700%'><feGaussianBlur stdDeviation='1.6'/></filter>
       <linearGradient id='led' x1='0' x2='1'><stop offset='0' stop-color='#ffe7a8' stop-opacity='0'/><stop offset='.15' stop-color='#fff6dc'/><stop offset='.85' stop-color='#fff6dc'/><stop offset='1' stop-color='#ffe7a8' stop-opacity='0'/></linearGradient>
     </defs>
