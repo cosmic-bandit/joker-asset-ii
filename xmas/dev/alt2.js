@@ -348,10 +348,22 @@
 
   // ── 9) Kartların üstünde kadife girland (banner üstündeki kurdeleli çam kuşağının küçüğü)
   // Tam kavis sayısına yuvarlanır (round): kartın iki ucunda yarım kavis kalmaz. Üst kenarın üzerine biner.
-  const SNOW = (h) => `content: "" !important; position: absolute !important; pointer-events: none !important; z-index: 6 !important;
-      height: ${h}px !important; background: url("${A2}xmas2-garland.webp") 0 0 / ${Math.round(h * 294 / 96)}px ${h}px round no-repeat !important;
+  // girland kavislerinin birleştiği yere header'dakiyle aynı beyaz ampul: karo kenarına yarım+yarım çizilir, round ölçeğiyle birlikte kayar.
+  // Kartın iki ucundaki yarım ampuller padding + content-box clip ile gizlenir. Tek/çift kart ters fazda yanıp söner.
+  const GBULB = (ph) => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='294' height='96' viewBox='0 0 294 96' preserveAspectRatio='none'>
+    <defs><radialGradient id='g'><stop offset='0' stop-color='#fffbe8' stop-opacity='.95'/><stop offset='.45' stop-color='#ffe7a8' stop-opacity='.4'/><stop offset='1' stop-color='#ffd36b' stop-opacity='0'/></radialGradient>
+    <radialGradient id='b' cx='.4' cy='.35'><stop offset='0' stop-color='#fff'/><stop offset='.7' stop-color='#f6f1e6'/><stop offset='1' stop-color='#d9d2c4'/></radialGradient></defs>
+    <style>.h,.c{animation:bl 1.6s steps(1,end) infinite;animation-delay:${ph}s}.c{animation-name:bc}@keyframes bl{0%{opacity:1}50%{opacity:0}}@keyframes bc{0%{opacity:1}50%{opacity:.45}}</style>
+    ${[0, 294].map((x) => `<rect x='${x - 4}' y='36' width='8' height='7' rx='2' fill='#e9e2d4'/><circle class='h' cx='${x}' cy='54' r='30' fill='url(#g)'/><circle class='c' cx='${x}' cy='54' r='11' fill='url(#b)'/>`).join('')}
+  </svg>`.replace(/\s+/g, ' '))}")`;
+  const GB_A = GBULB(0), GB_B = GBULB(-0.8);
+  const GARL = `url("${A2}xmas2-garland.webp")`;
+  const SNOW = (h) => { const tw = Math.round(h * 294 / 96), pad = Math.ceil(h * 30 / 96) + 1;
+    return `content: "" !important; position: absolute !important; pointer-events: none !important; z-index: 6 !important; box-sizing: border-box !important;
+      height: ${h}px !important; padding: 0 ${pad}px !important;
+      background: ${GB_A} 0 0 / ${tw}px ${h}px round no-repeat border-box content-box, ${GARL} 0 0 / ${tw}px ${h}px round no-repeat border-box border-box !important;
       -webkit-mask: none; mask: none; filter: drop-shadow(0 2px 2px rgba(10,5,30,.45));
-      transform-origin: 50% 0; transition: transform .5s cubic-bezier(.34,1.8,.5,1);`;
+      transform-origin: 50% 0; transition: transform .5s cubic-bezier(.34,1.8,.5,1);`; };
   const snowT = [
     // [seçici, pseudo, top, yan boşluk, yükseklik, position ekle?]
     ...(isMob ? [] : [['.product-banner-container-bc.product-banner-without-titles .product-banner-info-bc', '::after', -1, 4, 16, false]]),  // mobile'da bu pseudo'lar custom.css'te dolu
@@ -374,6 +386,7 @@
     css += `
     ${needPos ? `${sel} { position: relative !important; }` : ''}
     ${sel}${ps} { ${SNOW(sh)} top: ${top}px !important; left: ${side}px !important; right: ${side}px !important; }
+    ${sel}:nth-child(2n)${ps} { background-image: ${GB_B}, ${GARL} !important; }
     ${sel}:hover${ps} { transform: scaleY(1.18); }`;
     snowOK.push(sel);
   });
